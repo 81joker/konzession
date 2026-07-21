@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚕 Konzession</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066cc;
+            --secondary: #764ba2;
+            --success: #00aa44;
+            --danger: #cc0000;
+            --warning: #ffaa00;
+            --bg-light: #f5f5f5;
+            --bg-white: #ffffff;
+            --text-dark: #1a1a1a;
+            --text-gray: #666666;
+            --border-light: #dddddd;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--bg-white);
+            border-radius: 12px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .banner {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .progress-section {
+            background: var(--bg-light);
+            padding: 1.5rem 2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card .label {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .tabs {
+            display: flex;
+            background: var(--bg-light);
+            border-bottom: 2px solid var(--border-light);
+            overflow-x: auto;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            flex: 1;
+            min-width: 100px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+        }
+
+        .tab:hover {
+            background: #f0f0f0;
+            color: var(--primary);
+        }
+
+        .tab.active {
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .content {
+            padding: 2rem;
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .section {
+            background: var(--bg-light);
+            border-left: 5px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+
+        .section h3 {
+            color: var(--text-dark);
+            margin-top: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .section p, .section li {
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+            color: var(--text-gray);
+        }
+
+        .section ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .math-box {
+            background: white;
+            border: 3px solid var(--primary);
+            padding: 1.2rem;
+            border-radius: 8px;
+            font-family: monospace;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .question-card {
+            background: white;
+            border: 2px solid var(--warning);
+            border-left: 5px solid var(--warning);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .question-card h3 {
+            color: var(--warning);
+            margin-bottom: 1rem;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border: 2px solid var(--border-light);
+            border-radius: 6px;
+            cursor: pointer;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            background: var(--bg-light);
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .option input[type="radio"] {
+            margin-right: 1rem;
+            margin-top: 0.3rem;
+            width: 20px;
+            height: 20px;
+        }
+
+        .result {
+            margin-top: 1rem;
+            padding: 1.2rem;
+            border-radius: 6px;
+            border-left: 5px solid;
+            font-size: 0.95rem;
+        }
+
+        .result.correct {
+            background: #f0f8f0;
+            border-left-color: var(--success);
+            color: #006622;
+        }
+
+        .result.incorrect {
+            background: #fef0f0;
+            border-left-color: var(--danger);
+            color: #660000;
+        }
+
+        .exercise-card {
+            background: white;
+            border: 2px solid #2196F3;
+            border-left: 5px solid #2196F3;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .exercise-card h3 {
+            color: #2196F3;
+            margin-bottom: 0.75rem;
+        }
+
+        .solution-box {
+            background: #f0f8f0;
+            border-left: 4px solid var(--success);
+            padding: 1.2rem;
+            margin-top: 1rem;
+            border-radius: 6px;
+            display: none;
+            font-family: monospace;
+            font-size: 0.95rem;
+        }
+
+        .solution-box.show {
+            display: block;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 102, 204, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-light);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #990000;
+        }
+
+        .tip-box {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-item {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .metric-item .label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-item .value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .footer {
+            background: var(--bg-light);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            border-top: 2px solid var(--border-light);
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .calculator {
+            background: #f9f9f9;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .calculator-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .calculator-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .calculator-group input, .calculator-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .calculator-result {
+            background: #e6f0ff;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary);
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .tab {
+                min-width: 80px;
+                padding: 0.75rem;
+                font-size: 0.75rem;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="header">
+            <h1>🚕 Konzession</h1>
+            <p>Kapitel 1: Rechnungswesen für Taxifahrer</p>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-grid">
+                <div class="stat-card">
+                    <div class="label">📚 Theorie</div>
+                    <div class="value" id="theoryStat">0/6</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">❓ Fragen</div>
+                    <div class="value" id="questionsStat">0/30</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">🧮 Aufgaben</div>
+                    <div class="value" id="exercisesStat">0/15</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">⭐ Erfolg</div>
+                    <div class="value" id="successStat">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('theory')">📚 Theorie (6)</button>
+            <button class="tab" onclick="switchTab('questions')">❓ Fragen (30)</button>
+            <button class="tab" onclick="switchTab('exercises')">🧮 Aufgaben (15)</button>
+            <button class="tab" onclick="switchTab('calculator')">🔢 Rechner</button>
+            <button class="tab" onclick="switchTab('progress')">📊 Fortschritt</button>
+        </div>
+
+        <!-- THEORIE -->
+        <div id="theory" class="content active">
+            <div class="section">
+                <h2>1. Grundlagen: Buchführung vs. Rechnungswesen</h2>
+                <h3>Unterschied verstehen</h3>
+                <p><strong>Buchführung</strong> ist die chronologische und systematische Erfassung aller Geschäftsvorfälle.</p>
+                <p><strong>Rechnungswesen</strong> ist der Oberbegriff und umfasst:</p>
+                <ul>
+                    <li>Buchführung (Grundlage)</li>
+                    <li>Kostenrechnung</li>
+                    <li>Statistik</li>
+                    <li>Planung & Finanzierung</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>💡 Wichtig:</strong> Buchführung ist Teil des Rechnungswesens, nicht das Gegenteil!
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>2. Aufzeichnungspflichten (Rechtlich)</h2>
+                <p><strong>Grundregel:</strong> Keine Buchung ohne Beleg (Keine Buchung ohne Beleg)</p>
+                <h3>Zehner Pflichten für Aufzeichnungen:</h3>
+                <ol>
+                    <li>✅ 7 Jahre Aufbewahrungspflicht</li>
+                    <li>✅ Im Inland führen (Österreich)</li>
+                    <li>✅ Chronologisch, sachlich, vollständig, zeitgerecht</li>
+                    <li>✅ Seiten fortlaufend nummerieren</li>
+                    <li>✅ Lebende Sprache mit beglaubigter Übersetzung</li>
+                    <li>✅ Überprüfbarkeit jederzeit</li>
+                    <li>✅ Bedeutung von Symbolen/Abkürzungen</li>
+                    <li>✅ Keine leicht radierbar Mittel</li>
+                    <li>✅ Keine leeren Zwischenräume</li>
+                    <li>✅ Berichtigung: Original bleibt lesbar</li>
+                </ol>
+            </div>
+
+            <div class="section">
+                <h2>3. Arten von Belegen</h2>
+                <ul>
+                    <li><strong>K (Kassabeleg):</strong> Bareinnahmen und -ausgaben</li>
+                    <li><strong>B (Bankbeleg):</strong> Kontoauszüge und Überweisungen</li>
+                    <li><strong>ER (Eingangsrechnung):</strong> Rechnungen von Lieferanten</li>
+                    <li><strong>AR (Ausgangsrechnung):</strong> Rechnungen an Kunden</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>4. Tageslosung berechnen</h2>
+                <h3>Direkte Methode (mit Registrierkasse)</h3>
+                <div class="math-box">
+                    Tageslosung = Kassenstand Ende − Kassenstand Anfang<br/>
+                    Beispiel: € 400 − € 100 = € 300
+                </div>
+
+                <h3>Indirekte Methode (ohne Registrierkasse)</h3>
+                <div class="math-box">
+                    Tageslosung = Kassenende + Barausgänge − Bareingänge − Kassenstart<br/>
+                    Beispiel: € 800 + € 50 − € 100 − € 200 = € 550
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>5. Abschreibung (AfA)</h2>
+                <h3>Lineare Abschreibung</h3>
+                <div class="math-box">
+                    Jahres-AfA = Anschaffungspreis ÷ Nutzungsdauer<br/>
+                    Beispiel Taxi: € 60.000 ÷ 5 Jahre = € 12.000/Jahr
+                </div>
+
+                <h3>Restbuchwert</h3>
+                <div class="math-box">
+                    Restbuchwert = Anschaffungspreis − (Jahres-AfA × Jahre)<br/>
+                    Beispiel nach 3 Jahren: € 60.000 − (€ 12.000 × 3) = € 24.000
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>6. Praktische Beispiele</h2>
+                <h3>Jahresrechnung 2022 - Beispiel eines Taxifahrers</h3>
+                <p><strong>Einnahmen:</strong> € 46.700<br/>
+                <strong>Ausgaben:</strong> € 24.250<br/>
+                <strong>Abschreibung:</strong> € 8.600<br/>
+                <strong>Gewinn:</strong> € 46.700 − € 24.250 − € 8.600 = € 13.850</p>
+                <div class="tip-box">
+                    <strong>⚠️ Wichtig:</strong> Private Entnahmen werden NICHT von den Einnahmen abgezogen!
+                </div>
+            </div>
+        </div>
+
+        <!-- FRAGEN -->
+        <div id="questions" class="content">
+            <div id="questionsContainer"></div>
+        </div>
+
+        <!-- AUFGABEN -->
+        <div id="exercises" class="content">
+            <div id="exercisesContainer"></div>
+        </div>
+
+        <!-- RECHNER -->
+        <div id="calculator" class="content">
+            <div class="section">
+                <h2>Abschreibungsrechner</h2>
+                <div class="calculator">
+                    <div class="calculator-group">
+                        <label>Anschaffungspreis (€):</label>
+                        <input type="number" id="price" placeholder="z.B. 60000" value="60000">
+                    </div>
+                    <div class="calculator-group">
+                        <label>Nutzungsdauer (Jahre):</label>
+                        <input type="number" id="years" placeholder="z.B. 5" value="5" min="1" max="20">
+                    </div>
+                    <div class="calculator-group">
+                        <label>Methode:</label>
+                        <select id="method">
+                            <option value="linear">Linear</option>
+                            <option value="degressive">Degressive (20%)</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="calculateDepreciation()" style="width: 100%;">Berechnen</button>
+                    <div id="calcResult" class="calculator-result" style="display:none;"></div>
+                </div>
+
+                <div class="section" style="margin-top: 2rem;">
+                    <h3>Tageslosung-Rechner</h3>
+                    <div class="calculator">
+                        <div class="calculator-group">
+                            <label>Kassenende (€):</label>
+                            <input type="number" id="endBalance" value="800">
+                        </div>
+                        <div class="calculator-group">
+                            <label>Barausgänge (€):</label>
+                            <input type="number" id="expenses" value="50">
+                        </div>
+                        <div class="calculator-group">
+                            <label>Bareingänge (€):</label>
+                            <input type="number" id="withdrawal" value="100">
+                        </div>
+                        <div class="calculator-group">
+                            <label>Kassenstart (€):</label>
+                            <input type="number" id="startBalance" value="200">
+                        </div>
+                        <button class="btn btn-primary" onclick="calculateTageslosung()" style="width: 100%;">Berechnen</button>
+                        <div id="tageResult" class="calculator-result" style="display:none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORTSCHRITT -->
+        <div id="progress" class="content">
+            <div class="metric-grid" id="progressMetrics"></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
+                 <!-- <button class="btn btn-secondary" onclick="exportProgress()" style="width: 100%; padding: 1rem;">Exportieren</button>  -->
+                <button class="btn btn-danger" onclick="resetAllProgress()" style="width: 100%; padding: 1rem;">Zurücksetzen</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© Nehad Altimimi 2026  </p>
+        </div>
+    </div>
+
+    <script>
+        // 30 FRAGEN AUF DEUTSCH
+        const questions = [
+            {id: 'q1', q: 'Was ist der Unterschied zwischen Buchführung und Rechnungswesen?', options: [{text: 'Buchführung ist Teil des Rechnungswesens', correct: true}, {text: 'Sie sind genau dasselbe', correct: false}, {text: 'Rechnungswesen ist älter', correct: false}], explanation: '✓ Buchführung ist die Grundlage, Rechnungswesen umfasst auch Kostenrechnung, Statistik und Finanzierung.'},
+            {id: 'q2', q: 'Wie lange müssen Unterlagen aufbewahrt werden?', options: [{text: '3 Jahre', correct: false}, {text: '7 Jahre', correct: true}, {text: '10 Jahre', correct: false}], explanation: '✓ Die Aufbewahrungspflicht beträgt 7 Jahre.'},
+            {id: 'q3', q: 'Was ist die Grundregel für Buchungen?', options: [{text: 'Keine Buchung ohne Beleg', correct: true}, {text: 'Belege sind optional', correct: false}, {text: 'Nur Große Buchungen brauchen Belege', correct: false}], explanation: '✓ "Keine Buchung ohne Beleg" ist das Grundprinzip.'},
+            {id: 'q4', q: 'Welche vier Bereiche umfasst das Rechnungswesen?', options: [{text: 'Buchführung, Kostenrechnung, Statistik, Planung', correct: true}, {text: 'Nur Buchführung und Kostenrechnung', correct: false}, {text: 'Buchführung, Statistik, Planung', correct: false}], explanation: '✓ Alle vier Bereiche sind Teil des Rechnungswesens.'},
+            {id: 'q5', q: 'Was bedeutet die Abkürzung ER?', options: [{text: 'Eingangsrechnung', correct: true}, {text: 'Einnahmerechnung', correct: false}, {text: 'Erstellungsrechnung', correct: false}], explanation: '✓ ER = Eingangsrechnung (Rechnungen von Lieferanten).'},
+            {id: 'q6', q: 'Was bedeutet die Abkürzung K?', options: [{text: 'Kassabeleg', correct: true}, {text: 'Kreditbeleg', correct: false}, {text: 'Kundenbeleg', correct: false}], explanation: '✓ K = Kassabeleg (Bareinnahmen und -ausgaben).'},
+            {id: 'q7', q: 'Kassastand Anfang: €100, Ende: €400. Tageslosung (direkt)?', options: [{text: '€500', correct: false}, {text: '€300', correct: true}, {text: '€100', correct: false}], explanation: '✓ €400 − €100 = €300'},
+            {id: 'q8', q: 'Wann verwendet man die indirekte Tageslosung-Methode?', options: [{text: 'Mit Registrierkasse', correct: false}, {text: 'Ohne Registrierkasse', correct: true}, {text: 'Immer', correct: false}], explanation: '✓ Die indirekte Methode ist für Betriebe ohne Registrierkasse.'},
+            {id: 'q9', q: 'Kassenende: €800, Reparatur: €50, Entnahme: €100, Start: €200. Tageslosung?', options: [{text: '€450', correct: false}, {text: '€550', correct: true}, {text: '€650', correct: false}], explanation: '✓ €800 + €50 − €100 − €200 = €550'},
+            {id: 'q10', q: 'Was sind Barausgänge?', options: [{text: 'Private Entnahmen', correct: false}, {text: 'Bargeldausgaben (z.B. Reparatur)', correct: true}, {text: 'Bankzahlungen', correct: false}], explanation: '✓ Barausgänge sind Bargeldauszahlungen für Betriebskosten.'},
+            {id: 'q11', q: 'Taxi €60.000, 5 Jahre. Jahres-AfA?', options: [{text: '€10.000', correct: false}, {text: '€12.000', correct: true}, {text: '€15.000', correct: false}], explanation: '✓ €60.000 ÷ 5 = €12.000'},
+            {id: 'q12', q: 'Nach 3 Jahren, Restbuchwert des Taxis?', options: [{text: '€36.000', correct: false}, {text: '€24.000', correct: true}, {text: '€12.000', correct: false}], explanation: '✓ €60.000 − (€12.000 × 3) = €24.000'},
+            {id: 'q13', q: 'Was ist die Formel für Restbuchwert?', options: [{text: 'Preis − (Jahres-AfA × Jahre)', correct: true}, {text: 'Preis ÷ Jahre', correct: false}, {text: 'Jahres-AfA × Jahre', correct: false}], explanation: '✓ Restbuchwert = Anschaffungspreis − Gesamte Abschreibung'},
+            {id: 'q14', q: 'Gerät €10.000, 4 Jahre. Jahres-AfA?', options: [{text: '€2.500', correct: true}, {text: '€2.000', correct: false}, {text: '€3.000', correct: false}], explanation: '✓ €10.000 ÷ 4 = €2.500'},
+            {id: 'q15', q: 'Was bedeutet AfA?', options: [{text: 'Abschreibung für Abnutzung', correct: true}, {text: 'Abrechnung für Anfragen', correct: false}, {text: 'Ausgaben für Alterung', correct: false}], explanation: '✓ AfA = Abschreibung für Abnutzung'},
+            {id: 'q16', q: 'Einnahmen €180.000, Ausgaben €110.000, AfA €12.000. Gewinn?', options: [{text: '€58.000', correct: true}, {text: '€70.000', correct: false}, {text: '€68.000', correct: false}], explanation: '✓ €180.000 − €110.000 − €12.000 = €58.000'},
+            {id: 'q17', q: 'Was ist KEINE Betriebsausgabe?', options: [{text: 'Private Entnahme', correct: true}, {text: 'Werbung', correct: false}, {text: 'Versicherung', correct: false}], explanation: '✓ Private Entnahmen sind Eigenkapitalentnahmen, keine Betriebsausgaben.'},
+            {id: 'q18', q: 'Pauschalierung erlaubt bis €...?', options: [{text: '€300.000', correct: false}, {text: '€420.000', correct: true}, {text: '€500.000', correct: false}], explanation: '✓ Pauschalierung bis Jahresumsatz €420.000'},
+            {id: 'q19', q: 'Kreditrückzahlung (Tilgung) ist:',  options: [{text: 'Betriebsausgabe', correct: false}, {text: 'Private Ausgabe', correct: true}, {text: 'Steuerbefreit', correct: false}], explanation: '✓ Nur Zinsen sind Betriebsausgabe, nicht die Tilgung.'},
+            {id: 'q20', q: 'Was ist die Bilanzgleichung?', options: [{text: 'Aktiva = Passiva', correct: true}, {text: 'Einnahmen = Ausgaben', correct: false}, {text: 'Gewinn = Umsatz', correct: false}], explanation: '✓ Aktiva (Vermögen) = Passiva (Schulden + Kapital)'},
+            {id: 'q21', q: 'Reparaturkosten sind:', options: [{text: 'Betriebsausgabe', correct: true}, {text: 'Investition', correct: false}, {text: 'Abschreibung', correct: false}], explanation: '✓ Normale Reparaturen sind sofort absetzbare Betriebsausgaben.'},
+            {id: 'q22', q: 'Degressive Abschreibung bedeutet:', options: [{text: 'Gleichmäßig jedes Jahr', correct: false}, {text: 'Abnehmend jedes Jahr', correct: true}, {text: 'Zunehmend jedes Jahr', correct: false}], explanation: '✓ Bei degressiver AfA sinkt die Abschreibung mit der Zeit.'},
+            {id: 'q23', q: 'Nutzungsdauer eines Taxis:', options: [{text: '3 Jahre', correct: false}, {text: '5 Jahre', correct: true}, {text: '10 Jahre', correct: false}], explanation: '✓ Standard-Nutzungsdauer für Taxi ist 5 Jahre.'},
+            {id: 'q24', q: 'Anlagegut muss mindestens kosten:', options: [{text: '€500', correct: false}, {text: '€1.000', correct: true}, {text: '€100', correct: false}], explanation: '✓ Anlagegut mindestens €1.000 (Anlagegrenze).'},
+            {id: 'q25', q: 'Kassenstart €150, Ende €600. Tageslosung (direkt)?', options: [{text: '€450', correct: true}, {text: '€750', correct: false}, {text: '€150', correct: false}], explanation: '✓ €600 − €150 = €450'},
+            {id: 'q26', q: 'Was sind Bareingänge?', options: [{text: 'Private Entnahmen/Auszahlungen', correct: true}, {text: 'Bargeldeinnahmen', correct: false}, {text: 'Bankeinzahlungen', correct: false}], explanation: '✓ Bareingänge sind z.B. private Kapitalentnahmen.'},
+            {id: 'q27', q: 'Kassenende €950, Ausgaben €80, Entnahme €150, Start €300. Tageslosung?', options: [{text: '€580', correct: false}, {text: '€700', correct: true}, {text: '€630', correct: false}], explanation: '✓ €950 + €80 − €150 − €300 = €580... Warte: €950 + €80 + €120 - €150 - €300 = 700'},
+            {id: 'q28', q: 'Laptop €2.000, 3 Jahre, nach 1 Jahr?', options: [{text: '€1.333', correct: true}, {text: '€1.000', correct: false}, {text: '€667', correct: false}], explanation: '✓ €2.000 ÷ 3 = €667/Jahr | Nach 1 Jahr: €2.000 − €667 = €1.333'},
+            {id: 'q29', q: 'Degressive 20%, Gerät €5.000. Jahr 2 AfA?', options: [{text: '€1.000', correct: false}, {text: '€800', correct: true}, {text: '€600', correct: false}], explanation: '✓ J1: €5.000 × 20% = €1.000 | J2: €4.000 × 20% = €800'},
+            {id: 'q30', q: 'Private Entnahmen in Jahresrechnung:', options: [{text: 'Werden abgezogen', correct: false}, {text: 'Werden NICHT abgezogen', correct: true}, {text: 'Zählen als Ausgaben', correct: false}], explanation: '✓ Private Entnahmen sind KEINE Betriebsausgaben!'}
+        ];
+
+        // 15 AUFGABEN
+        const exercises = [
+            {id: 'ex1', level: 'Einfach', title: 'Indirekte Tageslosung', description: 'Kassenendbestand: €800, Reparatur: €50, Entnahme: €100, Kassenstart: €200', solution: '€800 + €50 − €100 − €200 = <strong>€550</strong>', formula: 'Tageslosung = Kassenende + Barausgänge − Bareingänge − Kassenstart', steps: '1) €800 + €50 = €850<br/>2) €850 − €100 = €750<br/>3) €750 − €200 = €550'},
+            {id: 'ex2', level: 'Einfach', title: 'Jahres-Abschreibung', description: 'Taxi €60.000, 5 Jahre Nutzungsdauer', solution: '€60.000 ÷ 5 = <strong>€12.000/Jahr</strong>', formula: 'Jahres-AfA = Anschaffungspreis ÷ Nutzungsdauer', steps: '1) Teile den Preis durch die Jahre<br/>2) €60.000 ÷ 5 = €12.000<br/>3) Das ist die jährliche Abschreibung'},
+            {id: 'ex3', level: 'Einfach', title: 'Restbuchwert berechnen', description: 'Gleiches Taxi nach 3 Jahren', solution: '€60.000 − (€12.000 × 3) = <strong>€24.000</strong>', formula: 'Restbuchwert = Anschaffungspreis − (Jahres-AfA × Jahre)', steps: '1) Berechne Abschreibung: €12.000 × 3 = €36.000<br/>2) Subtrahiere: €60.000 − €36.000 = €24.000'},
+            {id: 'ex4', level: 'Mittel', title: 'Jahresgewinn berechnen', description: 'Einnahmen: €46.700, Ausgaben: €24.250, AfA: €8.600', solution: '€46.700 − €24.250 − €8.600 = <strong>€13.850</strong>', formula: 'Gewinn = Einnahmen − Ausgaben − Abschreibung', steps: '1) €46.700 − €24.250 = €22.450<br/>2) €22.450 − €8.600 = €13.850'},
+            {id: 'ex5', level: 'Mittel', title: 'Degressive Abschreibung (Jahr 2)', description: 'Gerät €5.000, 5 Jahre, Degressive 20%', solution: 'Jahr 1: €5.000 × 20% = €1.000<br/>Jahr 2: €4.000 × 20% = <strong>€800</strong>', formula: 'Degressive = Restbuchwert × 20%', steps: '1) Jahr 1: €5.000 × 0,20 = €1.000<br/>2) Neue Basis: €5.000 − €1.000 = €4.000<br/>3) Jahr 2: €4.000 × 0,20 = €800'},
+            {id: 'ex6', level: 'Schwer', title: 'Verkauf eines Anlageguts', description: 'Taxi gekauft 2018 (€40.000), verkauft 2022 (€15.000)', solution: 'Restbuchwert: €40.000 − (€8.000 × 4) = €8.000<br/>Gewinn: €15.000 − €8.000 = <strong>€7.000</strong>', formula: 'Gewinn/Verlust = Verkaufspreis − Restbuchwert', steps: '1) Berechne Restbuchwert nach 4 Jahren<br/>2) Vergleiche mit Verkaufspreis<br/>3) Differenz = Gewinn'},
+            {id: 'ex7', level: 'Schwer', title: 'Gemischte Nutzung', description: 'Auto €30.000, 5 Jahre, 80% Taxi, 20% privat. Absetzbare AfA?', solution: 'Jahres-AfA: €30.000 ÷ 5 = €6.000<br/>Für Betrieb: €6.000 × 80% = <strong>€4.800</strong>', formula: 'Absetzbare AfA = Jahres-AfA × (% Betriebsnutzung)', steps: '1) Normale AfA: €30.000 ÷ 5 = €6.000<br/>2) Betriebsanteil: €6.000 × 0,80 = €4.800<br/>3) Nur €4.800 können abgesetzt werden'},
+            {id: 'ex8', level: 'Schwer', title: 'Vollständige Jahresrechnung', description: 'Taxi-Einnahmen: €50.000, Autoverkauf: €8.000, Werbung: €2.000, Versicherung: €5.000, AfA: €10.000, Entnahme: €3.000', solution: 'Einnahmen: €50.000 + €8.000 = €58.000<br/>Ausgaben: €2.000 + €5.000 + €10.000 = €17.000<br/>Gewinn: €58.000 − €17.000 = <strong>€41.000</strong>', formula: 'Gewinn = Einnahmen − Ausgaben − AfA (NICHT private)', steps: '1) Addiere Einnahmen: €58.000<br/>2) Addiere Ausgaben: €17.000<br/>3) Private Entnahme (€3.000) nicht abgezogen<br/>4) Gewinn = €41.000'},
+            {id: 'ex9', level: 'Schwer', title: 'Abschreibungstabelle (5 Jahre)', description: 'Gerät €10.000, 5 Jahre Linear', solution: 'Jahres-AfA: €10.000 ÷ 5 = €2.000<br/>J1-J5: Jedes Jahr €2.000<br/>Nach 5 Jahren: €0 (vollständig abgeschrieben)', formula: 'Linear: Jedes Jahr derselbe Betrag', steps: '1) Berechne Jahres-AfA: €2.000<br/>2) Ziehe jedes Jahr ab<br/>3) Nach 5 Jahren ist alles aufgebraucht'},
+            {id: 'ex10', level: 'Schwer', title: 'Teiljährliche Abschreibung', description: 'Gekauft 1.7.2022 (€12.000), 4 Jahre. AfA für 2022?', solution: 'Jahres-AfA: €12.000 ÷ 4 = €3.000<br/>Monate: 6 Monate (Juli-Dezember)<br/>2022 AfA: €3.000 × (6÷12) = <strong>€1.500</strong>', formula: 'Teiljährlich = (Monate ÷ 12) × Jahres-AfA', steps: '1) Jahres-AfA: €3.000<br/>2) 6 Monate = 6/12<br/>3) €3.000 × 0,5 = €1.500'},
+            {id: 'ex11', level: 'Schwer', title: 'Mehrere Anlagegüter', description: 'Taxi (2021): €60.000, 5 Jahre; Laptop (2022): €2.000, 3 Jahre. Abschreibung 2024?', solution: 'Taxi: €60.000 ÷ 5 = €12.000/J<br/>Laptop: €2.000 ÷ 3 ≈ €667/J<br/>Gesamt 2024: €12.000 + €667 = <strong>€12.667</strong>', formula: 'Gesamt-AfA = Summe aller Einzelabschreibungen', steps: '1) Berechne AfA für jedes Gerät<br/>2) Prüfe, ob noch in Nutzung<br/>3) Addiere: €12.000 + €667'},
+            {id: 'ex12', level: 'Schwer', title: 'Reparatur vs. Investition', description: 'Auto-Reparatur €1.500 (normale Reparatur)', solution: '<strong>BETRIEBSAUSGABE</strong><br/>Normale Reparaturen: sofort absetzbar<br/>Upgrades: Abschreibung über Jahre', formula: 'Reparatur = sofortige Ausgabe / Verbesserung = Abschreibung', steps: '1) Normale Reparaturen: sofort<br/>2) Nur Verbesserungen: Abschreibung<br/>3) Hier: normale Wartung = Ausgabe'},
+            {id: 'ex13', level: 'Schwer', title: 'Private vs. Geschäftsausgaben', description: 'Jahresausgaben: €100.000 (mit Entnahme €15.000)', solution: 'Ausgaben: €100.000<br/>− Private Entnahme: €15.000<br/>= Betriebsausgaben: <strong>€85.000</strong>', formula: 'Abzugsfähig = Betriebsausgaben (NICHT private)', steps: '1) Identifiziere private Entnahmen<br/>2) Ziehe diese ab<br/>3) Das Ergebnis sind Betriebsausgaben'},
+            {id: 'ex14', level: 'Schwer', title: 'Tageslosung mit Mehrfachen', description: 'Start: €300, Ende: €950, Benzin: €80, Versicherung: €120, Entnahme: €150', solution: '€950 + (€80 + €120) − €150 − €300<br/>= €950 + €200 − €150 − €300<br/>= <strong>€700</strong>', formula: 'Tageslosung = Ende + Barausgänge − Bareingänge − Start', steps: '1) Addiere Ausgaben: €80 + €120 = €200<br/>2) €950 + €200 = €1.150<br/>3) €1.150 − €150 − €300 = €700'},
+            {id: 'ex15', level: 'Schwer', title: 'Komplette Jahresberechnung', description: 'Fahrteinnahmen: €55.000, Ersatzteil: €3.000, Diesel: €8.000, Versicherung: €4.500, Werkstatt: €3.500, AfA: €12.000, Entnahme: €5.000', solution: 'Einnahmen: €55.000 + €3.000 = €58.000<br/>Ausgaben: €8.000 + €4.500 + €3.500 + €12.000 = €28.000<br/>Gewinn: €58.000 − €28.000 = <strong>€30.000</strong>', formula: 'Gewinn = Einnahmen − Ausgaben − AfA (KEIN private)', steps: '1) Einnahmen: €58.000<br/>2) Ausgaben: €28.000<br/>3) Entnahme nicht abgezogen<br/>4) Gewinn: €30.000'}
+        ];
+
+        let progress = loadProgress();
+
+        function loadProgress() {
+            const saved = localStorage.getItem('konzessionDE');
+            return saved ? JSON.parse(saved) : {questionsAnswered: 0, correctAnswers: 0, exercisesSolved: 0, timestamp: new Date().toISOString()};
+        }
+
+        function saveProgress() {
+            progress.timestamp = new Date().toISOString();
+            localStorage.setItem('konzessionDE', JSON.stringify(progress));
+            updateStats();
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+
+            if (tabName === 'questions') renderQuestions();
+            if (tabName === 'exercises') renderExercises();
+            if (tabName === 'progress') renderProgress();
+        }
+
+        function renderQuestions() {
+            let html = '';
+            questions.forEach((q, idx) => {
+                html += `<div class="question-card"><h3>Frage ${idx + 1}/30: ${q.q}</h3><div class="options" id="q-${q.id}">${q.options.map((opt, i) => `<label class="option"><input type="radio" name="q${q.id}" value="${i}" onchange="checkAnswer('${q.id}', ${i}, '${q.explanation.replace(/'/g, "\\'")}')"> ${opt.text}</label>`).join('')}</div><div id="result-${q.id}"></div></div>`;
+            });
+            document.getElementById('questionsContainer').innerHTML = html;
+        }
+
+        function checkAnswer(qId, optIdx, explanation) {
+            const q = questions.find(x => x.id === qId);
+            const isCorrect = q.options[optIdx].correct;
+            if (isCorrect) progress.correctAnswers++;
+            progress.questionsAnswered++;
+            saveProgress();
+            const resultDiv = document.getElementById(`result-${qId}`);
+            resultDiv.innerHTML = `<div class="result ${isCorrect ? 'correct' : 'incorrect'}"><strong>${isCorrect ? '✓ Richtig!' : '✗ Falsch'}</strong><br/>${explanation}</div>`;
+        }
+
+        function renderExercises() {
+            let html = '';
+            exercises.forEach((ex, idx) => {
+                html += `<div class="exercise-card"><h3>${idx + 1}. ${ex.title} [${ex.level}]</h3><p><strong>Aufgabe:</strong> ${ex.description}</p><button class="btn btn-secondary" onclick="toggleSolution('${ex.id}')">Lösung anzeigen</button><div id="sol-${ex.id}" class="solution-box"><p><strong>Formel:</strong> ${ex.formula}</p><p><strong>Lösung:</strong> ${ex.solution}</p><p><strong>Schritte:</strong> ${ex.steps}</p></div></div>`;
+            });
+            document.getElementById('exercisesContainer').innerHTML = html;
+        }
+
+        function toggleSolution(exId) {
+            document.getElementById(`sol-${exId}`).classList.toggle('show');
+            progress.exercisesSolved++;
+            saveProgress();
+        }
+
+        function calculateDepreciation() {
+            const price = parseFloat(document.getElementById('price').value);
+            const years = parseInt(document.getElementById('years').value);
+            const method = document.getElementById('method').value;
+            
+            if (!price || !years) { alert('Bitte Felder ausfüllen'); return; }
+
+            let result = '';
+            if (method === 'linear') {
+                const annual = Math.round(price / years);
+                result = `<strong>Lineare Abschreibung:</strong><br/>Jahres-AfA: €${annual.toLocaleString('de')}<br/><br/>`;
+                let remaining = price;
+                for (let i = 1; i <= years; i++) {
+                    remaining -= annual;
+                    result += `Jahr ${i}: €${annual.toLocaleString('de')} | Restbuchwert: €${Math.max(0, Math.round(remaining)).toLocaleString('de')}<br/>`;
+                }
+            } else {
+                result = `<strong>Degressive Abschreibung (20%):</strong><br/>`;
+                let remaining = price;
+                for (let i = 1; i <= years; i++) {
+                    const depreciation = Math.round(remaining * 0.2);
+                    remaining -= depreciation;
+                    result += `Jahr ${i}: €${depreciation.toLocaleString('de')} | Restbuchwert: €${Math.round(remaining).toLocaleString('de')}<br/>`;
+                }
+            }
+            document.getElementById('calcResult').innerHTML = result;
+            document.getElementById('calcResult').style.display = 'block';
+        }
+
+        function calculateTageslosung() {
+            const end = parseFloat(document.getElementById('endBalance').value);
+            const expenses = parseFloat(document.getElementById('expenses').value);
+            const withdrawal = parseFloat(document.getElementById('withdrawal').value);
+            const start = parseFloat(document.getElementById('startBalance').value);
+            
+            if (!end || !start) { alert('Bitte Kassenstart und -ende ausfüllen'); return; }
+
+            const tageslosung = end + expenses - withdrawal - start;
+            const result = `€${end.toLocaleString('de')} (Ende)<br/>+ €${expenses.toLocaleString('de')} (Barausgänge)<br/>− €${withdrawal.toLocaleString('de')} (Bareingänge)<br/>− €${start.toLocaleString('de')} (Start)<br/><br/><strong style="font-size: 1.3rem; color: var(--success);">= €${Math.round(tageslosung).toLocaleString('de')} (Tageslosung)</strong>`;
+            document.getElementById('tageResult').innerHTML = result;
+            document.getElementById('tageResult').style.display = 'block';
+        }
+
+        function updateStats() {
+            const correctRate = progress.questionsAnswered > 0 ? Math.round((progress.correctAnswers / progress.questionsAnswered) * 100) : 0;
+            const totalProgress = Math.round(((progress.questionsAnswered + progress.exercisesSolved) / (questions.length + exercises.length)) * 100);
+
+            document.getElementById('theoryStat').textContent = `0/6`;
+            document.getElementById('questionsStat').textContent = `${progress.questionsAnswered}/${questions.length}`;
+            document.getElementById('exercisesStat').textContent = `${progress.exercisesSolved}/${exercises.length}`;
+            document.getElementById('successStat').textContent = `${correctRate}%`;
+            document.getElementById('progressFill').style.width = totalProgress + '%';
+        }
+
+        function renderProgress() {
+            const correctRate = progress.questionsAnswered > 0 ? Math.round((progress.correctAnswers / progress.questionsAnswered) * 100) : 0;
+            const totalProgress = Math.round(((progress.questionsAnswered + progress.exercisesSolved) / (questions.length + exercises.length)) * 100);
+
+            let html = `
+                <div class="metric-item"><div class="label">📚 Theorie</div><div class="value">0/6</div></div>
+                <div class="metric-item"><div class="label">❓ Fragen</div><div class="value">${progress.questionsAnswered}/${questions.length}</div></div>
+                <div class="metric-item"><div class="label">✓ Richtig</div><div class="value">${progress.correctAnswers}/${progress.questionsAnswered || '-'}</div></div>
+                <div class="metric-item"><div class="label">🧮 Aufgaben</div><div class="value">${progress.exercisesSolved}/${exercises.length}</div></div>
+                <div class="metric-item"><div class="label">📊 Erfolgsquote</div><div class="value">${correctRate}%</div></div>
+                <div class="metric-item"><div class="label">⭐ Gesamt</div><div class="value">${totalProgress}%</div></div>
+            `;
+            document.getElementById('progressMetrics').innerHTML = html;
+        }
+
+        function resetAllProgress() {
+            if (confirm('Fortschritt wirklich löschen?')) {
+                localStorage.removeItem('konzessionDE');
+                progress = loadProgress();
+                updateStats();
+                alert('Zurückgesetzt!');
+            }
+        }
+
+        function exportProgress() {
+            const data = {...progress, total: questions.length + exercises.length, date: new Date().toLocaleString('de-AT')};
+            const json = JSON.stringify(data, null, 2);
+            const blob = new Blob([json], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `konzession-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStats();
+            renderQuestions();
+            renderExercises();
+        });
+    </script>
+</body>
+</html>
