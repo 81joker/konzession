@@ -3,14 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚕 Konzession Trainer</title>
+    <title>🚕 Konzession Trainer - K1, K2 & K3 - ULTIMATE</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #0066cc;
             --secondary: #764ba2;
@@ -24,7 +19,6 @@
             --text-gray: #666666;
             --border-light: #dddddd;
         }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -32,40 +26,27 @@
             padding: 20px;
             color: var(--text-dark);
         }
-
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             background: var(--bg-white);
             border-radius: 12px;
             box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
             overflow: hidden;
         }
-
-
+    
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 2.5rem 2rem;
+            padding: 2rem 2rem;
             text-align: center;
         }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.95;
-        }
-
+        .header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .header p { font-size: 0.95rem; opacity: 0.9; }
         .progress-section {
             background: var(--bg-light);
             padding: 1.5rem 2rem;
         }
-
         .progress-bar {
             width: 100%;
             height: 10px;
@@ -74,77 +55,53 @@
             margin-bottom: 1rem;
             overflow: hidden;
         }
-
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, var(--primary), var(--success));
             width: 0%;
             transition: width 0.3s ease;
         }
-
-        .progress-grid {
+        .stat-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 0.8rem;
         }
-
         .stat-card {
             background: white;
-            padding: 1rem;
+            padding: 0.8rem;
             border-radius: 8px;
             border-left: 4px solid var(--primary);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
-
-        .stat-card .label {
-            font-size: 0.8rem;
-            color: var(--text-gray);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-card .value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-
+        .stat-card .label { font-size: 0.7rem; color: var(--text-gray); }
+        .stat-card .value { font-size: 1.3rem; font-weight: bold; color: var(--primary); }
         .chapter-selector {
             background: var(--bg-light);
             padding: 1.5rem 2rem;
-            border-top: 2px solid var(--border-light);
-            border-bottom: 2px solid var(--border-light);
+            border: 2px solid var(--border-light);
         }
-
         .chapter-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             flex-wrap: wrap;
             justify-content: center;
         }
-
         .chapter-btn {
-            padding: 1rem 2rem;
+            padding: 0.7rem 1.2rem;
             border: 2px solid var(--primary);
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 600;
             background: white;
             color: var(--primary);
             transition: all 0.3s;
         }
-
         .chapter-btn.active {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
         }
-
-        .chapter-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
-        }
-
         .tabs {
             display: flex;
             background: var(--bg-light);
@@ -152,905 +109,719 @@
             overflow-x: auto;
             flex-wrap: wrap;
         }
-
         .tab {
             flex: 1;
-            min-width: 100px;
-            padding: 1rem;
+            min-width: 80px;
+            padding: 0.8rem;
             text-align: center;
             cursor: pointer;
             border: none;
             background: transparent;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--text-gray);
             transition: all 0.3s;
             border-bottom: 3px solid transparent;
             font-weight: 500;
         }
-
-        .tab:hover {
-            background: #f0f0f0;
-            color: var(--primary);
-        }
-
         .tab.active {
             color: white;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
         }
-
         .content {
-            padding: 2rem;
+            padding: 1.5rem;
             display: none;
+            max-height: 70vh;
+            overflow-y: auto;
         }
-
-        .content.active {
-            display: block;
-        }
-
+        .content.active { display: block; }
         .section {
             background: var(--bg-light);
             border-left: 5px solid var(--primary);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
             border-radius: 8px;
         }
-
         .section h2 {
             color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
         }
-
         .section h3 {
             color: var(--text-dark);
-            margin-top: 1.2rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .section p, .section li {
-            line-height: 1.7;
-            margin-bottom: 0.75rem;
-            color: var(--text-gray);
-        }
-
-        .section ul {
-            margin-left: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .math-box {
-            background: white;
-            border: 3px solid var(--primary);
-            padding: 1.2rem;
-            border-radius: 8px;
-            font-family: monospace;
-            margin: 1rem 0;
+            margin: 0.8rem 0 0.4rem 0;
             font-size: 0.95rem;
-            line-height: 1.8;
         }
-
-        .example-box {
-            background: #f9fff0;
-            border-left: 4px solid var(--success);
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border-radius: 4px;
+        .section p, .section li {
+            line-height: 1.5;
+            margin-bottom: 0.4rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
         }
-
+        .section ul { margin-left: 1.5rem; }
         .question-card {
             background: white;
             border: 2px solid var(--warning);
             border-left: 5px solid var(--warning);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
             border-radius: 8px;
         }
-
         .question-card h3 {
             color: var(--warning);
-            margin-bottom: 1rem;
+            margin-bottom: 0.7rem;
+            font-size: 0.85rem;
         }
-
         .options {
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
-            margin: 1rem 0;
+            gap: 0.4rem;
         }
-
         .option {
             display: flex;
             align-items: flex-start;
-            padding: 1rem;
+            padding: 0.6rem;
             border: 2px solid var(--border-light);
             border-radius: 6px;
             cursor: pointer;
             background: white;
             transition: all 0.3s;
+            font-size: 0.85rem;
         }
-
         .option:hover {
             background: var(--bg-light);
             border-color: var(--primary);
-            transform: translateX(5px);
         }
-
         .option input[type="radio"] {
-            margin-right: 1rem;
-            margin-top: 0.3rem;
-            width: 20px;
-            height: 20px;
+            margin-right: 0.6rem;
+            margin-top: 0.15rem;
         }
-
         .result {
-            margin-top: 1rem;
-            padding: 1.2rem;
+            margin-top: 0.6rem;
+            padding: 0.8rem;
             border-radius: 6px;
-            border-left: 5px solid;
-            font-size: 0.95rem;
+            border-left: 4px solid;
+            font-size: 0.8rem;
         }
-
         .result.correct {
             background: #f0f8f0;
             border-left-color: var(--success);
             color: #006622;
         }
-
         .result.incorrect {
             background: #fef0f0;
             border-left-color: var(--danger);
             color: #660000;
         }
-
         .exercise-card {
             background: white;
             border: 2px solid #2196F3;
             border-left: 5px solid #2196F3;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
             border-radius: 8px;
         }
-
         .exercise-card h3 {
             color: #2196F3;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.85rem;
         }
-
+        .exercise-card p {
+            font-size: 0.85rem;
+            margin: 0.4rem 0;
+            color: var(--text-gray);
+        }
         .solution-box {
             background: #f0f8f0;
             border-left: 4px solid var(--success);
-            padding: 1.2rem;
-            margin-top: 1rem;
+            padding: 0.8rem;
+            margin-top: 0.6rem;
             border-radius: 6px;
             display: none;
             font-family: monospace;
-            font-size: 0.95rem;
+            font-size: 0.8rem;
+            color: #006622;
         }
-
-        .solution-box.show {
-            display: block;
-        }
-
+        .solution-box.show { display: block; }
         .btn {
-            padding: 0.75rem 1.5rem;
+            padding: 0.5rem 1rem;
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.8rem;
             font-weight: 500;
             transition: all 0.3s;
         }
-
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
         }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 102, 204, 0.3);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-secondary:hover {
-            background: var(--bg-light);
-        }
-
         .btn-danger {
             background: var(--danger);
             color: white;
         }
-
-        .btn-danger:hover {
-            background: #990000;
-        }
-
-        .tip-box {
-            background: #fff3e0;
-            border-left: 4px solid var(--warning);
-            padding: 1rem;
-            border-radius: 6px;
-            margin: 1rem 0;
-        }
-
         .metric-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
-
         .metric-item {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 1.5rem;
+            padding: 1.2rem;
             border-radius: 8px;
             text-align: center;
         }
-
-        .metric-item .label {
-            font-size: 0.85rem;
-            opacity: 0.9;
-            margin-bottom: 0.5rem;
-        }
-
-        .metric-item .value {
-            font-size: 2rem;
-            font-weight: bold;
-        }
-
-        .calculator {
-            background: #f9f9f9;
-            border: 2px solid var(--primary);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-        }
-
-        .calculator-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .calculator-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .calculator-group input, .calculator-group select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-light);
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        .calculator-result {
-            background: #e6f0ff;
-            padding: 1rem;
-            border-radius: 6px;
-            border-left: 4px solid var(--primary);
-            font-weight: bold;
-            margin-top: 1rem;
-        }
-
-        .comparison-table {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .comparison-box {
-            background: white;
-            border: 2px solid var(--primary);
-            padding: 1rem;
-            border-radius: 6px;
-        }
-
-        .comparison-box h4 {
-            color: var(--primary);
-            margin-bottom: 0.75rem;
-        }
-
-        .table-responsive {
-            overflow-x: auto;
-            margin: 1rem 0;
-        }
-
-        .table-responsive table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-        }
-
-        .table-responsive th {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .table-responsive td {
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid var(--border-light);
-        }
-
+        .metric-item .label { font-size: 0.7rem; opacity: 0.9; }
+        .metric-item .value { font-size: 1.6rem; font-weight: bold; margin-top: 0.3rem; }
         .footer {
             background: var(--bg-light);
-            padding: 1.5rem 2rem;
+            padding: 1rem 2rem;
             text-align: center;
             border-top: 2px solid var(--border-light);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--text-gray);
         }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8rem;
-            }
-
-            .tab {
-                min-width: 80px;
-                padding: 0.75rem;
-                font-size: 0.75rem;
-            }
-
-            .content {
-                padding: 1rem;
-            }
-
-            .comparison-table {
-                grid-template-columns: 1fr;
-            }
-
-            .chapter-buttons {
-                flex-direction: column;
-            }
-
-            .chapter-btn {
-                width: 100%;
-            }
+        .calculator-box {
+            background: white;
+            border: 2px solid var(--info);
+            border-left: 5px solid var(--info);
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 0.6rem;
+            margin: 0.5rem 0;
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .calc-result {
+            background: #f0f8f0;
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 6px;
+            color: #006622;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="container">
+
         <div class="header">
             <h1>🚕 Konzession Trainer</h1>
+            <p>Theorie + 110+ Fragen + 30 Schwere Aufgaben + Rechner + Fortschritt</p>
         </div>
 
         <div class="progress-section">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <div class="progress-grid">
-                <div class="stat-card">
-                    <div class="label">📚 Aktuel Kapitel</div>
-                    <div class="value" id="chapterStat">1/2</div>
-                </div>
-                <div class="stat-card">
-                    <div class="label">❓ Fragen</div>
-                    <div class="value" id="questionsStat">0/65</div>
-                </div>
-                <div class="stat-card">
-                    <div class="label">🧮 Aufgaben</div>
-                    <div class="value" id="exercisesStat">0/35</div>
-                </div>
-                <div class="stat-card">
-                    <div class="label">⭐ Erfolg</div>
-                    <div class="value" id="successStat">0%</div>
-                </div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="stat-grid">
+                <div class="stat-card"><div class="label">Kapitel</div><div class="value" id="chapterStat">1/3</div></div>
+                <div class="stat-card"><div class="label">❓ Fragen</div><div class="value" id="qStat">0/110</div></div>
+                <div class="stat-card"><div class="label">📝 Aufgaben</div><div class="value" id="exStat">0/30</div></div>
+                <div class="stat-card"><div class="label">✓ Richtig</div><div class="value" id="okStat">0%</div></div>
             </div>
         </div>
 
         <div class="chapter-selector">
-            <div style="text-align: center; margin-bottom: 1rem;">
-                <h3 style="color: var(--primary);">Wähle dein Kapitel:</h3>
-            </div>
+            <h3 style="text-align: center; margin-bottom: 1rem; color: var(--primary);">📖 Kapitel wählen:</h3>
             <div class="chapter-buttons">
-                <button class="chapter-btn active" onclick="switchChapter(1)">📖 Kapitel 1: Rechnungswesen</button>
-                <button class="chapter-btn" onclick="switchChapter(2)">📊 Kapitel 2: Doppelte Buchführung</button>
+                <button class="chapter-btn active" onclick="switchChapter(1)">K1: Rechnungswesen (40)</button>
+                <button class="chapter-btn" onclick="switchChapter(2)">K2: Bilanz (45)</button>
+                <button class="chapter-btn" onclick="switchChapter(3)">K3: Lohnverrechnung (25)</button>
             </div>
         </div>
 
         <div class="tabs">
             <button class="tab active" onclick="switchTab('theory')">📚 Theorie</button>
             <button class="tab" onclick="switchTab('questions')">❓ Fragen</button>
-            <button class="tab" onclick="switchTab('exercises')">🧮 Aufgaben</button>
+            <button class="tab" onclick="switchTab('exercises')">📝 Aufgaben</button>
             <button class="tab" onclick="switchTab('calculator')">🔢 Rechner</button>
             <button class="tab" onclick="switchTab('progress')">📊 Fortschritt</button>
         </div>
 
-        <!-- THEORIE -->
-        <div id="theory" class="content active">
-            <div id="theoryContent"></div>
-        </div>
-
-        <!-- FRAGEN -->
-        <div id="questions" class="content">
-            <div id="questionsContainer"></div>
-        </div>
-
-        <!-- AUFGABEN -->
-        <div id="exercises" class="content">
-            <div id="exercisesContainer"></div>
-        </div>
-
-        <!-- RECHNER -->
-        <div id="calculator" class="content">
-            <div id="calculatorContent"></div>
-        </div>
-
-        <!-- FORTSCHRITT -->
+        <div id="theory" class="content active"><div id="theoryContent"></div></div>
+        <div id="questions" class="content"><div id="questionsContainer"></div></div>
+        <div id="exercises" class="content"><div id="exercisesContainer"></div></div>
+        <div id="calculator" class="content"><div id="calculatorContent"></div></div>
         <div id="progress" class="content">
-            <div class="metric-grid" id="progressMetrics"></div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
-                <button class="btn btn-danger" onclick="resetAllProgress()" style="width: 100%; padding: 1rem;">Zurücksetzen</button>
-            </div>
+            <div id="progressMetrics"></div>
+            <button class="btn btn-danger" onclick="resetProgress()" style="width: 100%; padding: 0.8rem; margin-top: 1rem;">Fortschritt Zurücksetzen</button>
         </div>
 
-        <div class="footer">
-            <p>© Nehad Altimimi 2026</p>
-        </div>
+        <div class="footer">Nehad Altimimi © 2026</div>
     </div>
 
     <script>
-        // ==================== KAPITEL 1 ====================
-        const chapter1Questions = [
-            {id: 'k1q1', q: 'Was ist der Unterschied zwischen Buchführung und Rechnungswesen?', options: [{text: 'Buchführung ist Teil des Rechnungswesens', correct: true}, {text: 'Sie sind genau dasselbe', correct: false}, {text: 'Rechnungswesen ist älter', correct: false}], explanation: '✓ Buchführung ist die Grundlage, Rechnungswesen umfasst auch Kostenrechnung, Statistik und Finanzierung.'},
-            {id: 'k1q2', q: 'Wie lange müssen Unterlagen aufbewahrt werden?', options: [{text: '3 Jahre', correct: false}, {text: '7 Jahre', correct: true}, {text: '10 Jahre', correct: false}], explanation: '✓ Die Aufbewahrungspflicht beträgt 7 Jahre.'},
-            {id: 'k1q3', q: 'Was ist die Grundregel für Buchungen?', options: [{text: 'Keine Buchung ohne Beleg', correct: true}, {text: 'Belege sind optional', correct: false}, {text: 'Nur große Buchungen brauchen Belege', correct: false}], explanation: '✓ "Keine Buchung ohne Beleg" ist das Grundprinzip.'},
-            {id: 'k1q4', q: 'Welche vier Bereiche umfasst das Rechnungswesen?', options: [{text: 'Buchführung, Kostenrechnung, Statistik, Planung', correct: true}, {text: 'Nur Buchführung und Kostenrechnung', correct: false}, {text: 'Buchführung, Statistik, Planung', correct: false}], explanation: '✓ Alle vier Bereiche sind Teil des Rechnungswesens.'},
-            {id: 'k1q5', q: 'Was bedeutet die Abkürzung ER?', options: [{text: 'Eingangsrechnung', correct: true}, {text: 'Einnahmerechnung', correct: false}, {text: 'Erstellungsrechnung', correct: false}], explanation: '✓ ER = Eingangsrechnung (Rechnungen von Lieferanten).'},
-            {id: 'k1q6', q: 'Was bedeutet die Abkürzung K?', options: [{text: 'Kassabeleg', correct: true}, {text: 'Kreditbeleg', correct: false}, {text: 'Kundenbeleg', correct: false}], explanation: '✓ K = Kassabeleg (Bareinnahmen und -ausgaben)'},
-            {id: 'k1q7', q: 'Kassastand Anfang: €100, Ende: €400. Tageslosung (direkt)?', options: [{text: '€500', correct: false}, {text: '€300', correct: true}, {text: '€100', correct: false}], explanation: '✓ €400 − €100 = €300'},
-            {id: 'k1q8', q: 'Wann verwendet man die indirekte Tageslosung-Methode?', options: [{text: 'Mit Registrierkasse', correct: false}, {text: 'Ohne Registrierkasse', correct: true}, {text: 'Immer', correct: false}], explanation: '✓ Die indirekte Methode ist für Betriebe ohne Registrierkasse.'},
-            {id: 'k1q9', q: 'Kassenende: €800, Reparatur: €50, Entnahme: €100, Start: €200. Tageslosung?', options: [{text: '€450', correct: false}, {text: '€550', correct: true}, {text: '€650', correct: false}], explanation: '✓ €800 + €50 − €100 − €200 = €550'},
-            {id: 'k1q10', q: 'Was sind Barausgänge?', options: [{text: 'Private Entnahmen', correct: false}, {text: 'Bargeldausgaben (z.B. Reparatur)', correct: true}, {text: 'Bankzahlungen', correct: false}], explanation: '✓ Barausgänge sind Bargeldauszahlungen für Betriebskosten.'},
-            {id: 'k1q11', q: 'Taxi €60.000, 5 Jahre. Jahres-AfA?', options: [{text: '€10.000', correct: false}, {text: '€12.000', correct: true}, {text: '€15.000', correct: false}], explanation: '✓ €60.000 ÷ 5 = €12.000'},
-            {id: 'k1q12', q: 'Nach 3 Jahren, Restbuchwert des Taxis?', options: [{text: '€36.000', correct: false}, {text: '€24.000', correct: true}, {text: '€12.000', correct: false}], explanation: '✓ €60.000 − (€12.000 × 3) = €24.000'},
-            {id: 'k1q13', q: 'Was ist die Formel für Restbuchwert?', options: [{text: 'Anschaffungspreis − (Jahres-AfA × Jahre)', correct: true}, {text: 'Anschaffungspreis ÷ Jahre', correct: false}, {text: 'Jahres-AfA × Jahre', correct: false}], explanation: '✓ Restbuchwert = Anschaffungspreis − Gesamte Abschreibung'},
-            {id: 'k1q14', q: 'Gerät €10.000, 4 Jahre. Jahres-AfA?', options: [{text: '€2.500', correct: true}, {text: '€2.000', correct: false}, {text: '€3.000', correct: false}], explanation: '✓ €10.000 ÷ 4 = €2.500'},
-            {id: 'k1q15', q: 'Was bedeutet AfA?', options: [{text: 'Abschreibung für Abnutzung', correct: true}, {text: 'Abrechnung für Anfragen', correct: false}, {text: 'Ausgaben für Alterung', correct: false}], explanation: '✓ AfA = Abschreibung für Abnutzung'},
-            {id: 'k1q16', q: 'Einnahmen €180.000, Ausgaben €110.000, AfA €12.000. Gewinn?', options: [{text: '€58.000', correct: true}, {text: '€70.000', correct: false}, {text: '€68.000', correct: false}], explanation: '✓ €180.000 − €110.000 − €12.000 = €58.000'},
-            {id: 'k1q17', q: 'Was ist KEINE Betriebsausgabe?', options: [{text: 'Private Entnahme', correct: true}, {text: 'Werbung', correct: false}, {text: 'Versicherung', correct: false}], explanation: '✓ Private Entnahmen sind Eigenkapitalentnahmen, keine Betriebsausgaben.'},
-            {id: 'k1q18', q: 'Pauschalierung erlaubt bis €...?', options: [{text: '€300.000', correct: false}, {text: '€420.000', correct: true}, {text: '€500.000', correct: false}], explanation: '✓ Pauschalierung bis Jahresumsatz €420.000'},
-            {id: 'k1q19', q: 'Kreditrückzahlung (Tilgung) ist:', options: [{text: 'Betriebsausgabe', correct: false}, {text: 'Private Ausgabe', correct: true}, {text: 'Steuerbefreit', correct: false}], explanation: '✓ Nur Zinsen sind Betriebsausgabe, nicht die Tilgung.'},
-            {id: 'k1q20', q: 'Was ist die Bilanzgleichung?', options: [{text: 'Aktiva = Passiva', correct: true}, {text: 'Aktiva + Passiva = 0', correct: false}, {text: 'Aktiva - Passiva = Gewinn', correct: false}], explanation: '✓ Aktiva (Vermögen) = Passiva (Schulden + Kapital)'},
-            {id: 'k1q21', q: 'Reparaturkosten sind:', options: [{text: 'Betriebsausgabe', correct: true}, {text: 'Investition', correct: false}, {text: 'Abschreibung', correct: false}], explanation: '✓ Normale Reparaturen sind sofort absetzbare Betriebsausgaben.'},
-            {id: 'k1q22', q: 'Degressive Abschreibung bedeutet:', options: [{text: 'Gleichmäßig jedes Jahr', correct: false}, {text: 'Abnehmend jedes Jahr', correct: true}, {text: 'Zunehmend jedes Jahr', correct: false}], explanation: '✓ Bei degressiver AfA sinkt die Abschreibung mit der Zeit.'},
-            {id: 'k1q23', q: 'Nutzungsdauer eines Taxis:', options: [{text: '3 Jahre', correct: false}, {text: '5 Jahre', correct: true}, {text: '10 Jahre', correct: false}], explanation: '✓ Standard-Nutzungsdauer für Taxi ist 5 Jahre.'},
-            {id: 'k1q24', q: 'Anlagegut muss mindestens kosten:', options: [{text: '€500', correct: false}, {text: '€1.000', correct: true}, {text: '€100', correct: false}], explanation: '✓ Anlagegut mindestens €1.000.'},
-            {id: 'k1q25', q: 'Kassenstart €150, Ende €600. Tageslosung (direkt)?', options: [{text: '€450', correct: true}, {text: '€750', correct: false}, {text: '€150', correct: false}], explanation: '✓ €600 − €150 = €450'},
-            {id: 'k1q26', q: 'Was sind Bareingänge?', options: [{text: 'Private Entnahmen/Auszahlungen', correct: true}, {text: 'Bargeldeinnahmen', correct: false}, {text: 'Bankeinzahlungen', correct: false}], explanation: '✓ Bareingänge sind z.B. private Kapitalentnahmen.'},
-            {id: 'k1q27', q: 'Kassenende €950, Ausgaben €80, Entnahme €150, Start €300. Tageslosung?', options: [{text: '€580', correct: false}, {text: '€700', correct: true}, {text: '€630', correct: false}], explanation: '✓ €950 + €80 − €150 − €300 = €580... Warte: €950 + €80 + €120 − €150 − €300 = 700'},
-            {id: 'k1q28', q: 'Laptop €2.000, 3 Jahre, nach 1 Jahr?', options: [{text: '€1.333', correct: true}, {text: '€1.000', correct: false}, {text: '€667', correct: false}], explanation: '✓ €2.000 ÷ 3 = €667 | Nach 1 Jahr: €2.000 − €667 = €1.333'},
-            {id: 'k1q29', q: 'Degressive 20%, Gerät €5.000. Jahr 2 AfA?', options: [{text: '€1.000', correct: false}, {text: '€800', correct: true}, {text: '€600', correct: false}], explanation: '✓ J1: €5.000 × 20% = €1.000 | J2: €4.000 × 20% = €800'},
-            {id: 'k1q30', q: 'Private Entnahmen in Jahresrechnung:', options: [{text: 'Werden abgezogen', correct: false}, {text: 'Werden NICHT abgezogen', correct: true}, {text: 'Zählen als Ausgaben', correct: false}], explanation: '✓ Private Entnahmen sind KEINE Betriebsausgaben!'}
-        ];
+        // ==================== ALLE 110+ FRAGEN AUS DEM ORIGINAL ====================
+        const allQuestions = {
+            1: [ // K1 - 40 Fragen
+                {id: 'k1q1', q: 'Unterschied Buchführung und Rechnungswesen?', options: [{text: 'Buchführung ist Teil des Rechnungswesens', correct: true}, {text: 'Das Gleiche', correct: false}, {text: 'Rechnungswesen ist älter', correct: false}], explanation: '✓ Buchführung ist Grundlage, Rechnungswesen umfasst auch Kostenrechnung, Statistik, Finanzierung'},
+                {id: 'k1q2', q: 'Aufbewahrungspflicht?', options: [{text: '3 Jahre', correct: false}, {text: '7 Jahre', correct: true}, {text: '10 Jahre', correct: false}], explanation: '✓ 7 Jahre'},
+                {id: 'k1q3', q: 'Grundregel für Buchungen?', options: [{text: 'Keine Buchung ohne Beleg', correct: true}, {text: 'Belege optional', correct: false}, {text: 'Nur große', correct: false}], explanation: '✓ Keine Buchung ohne Beleg'},
+                {id: 'k1q4', q: 'Vier Bereiche Rechnungswesen?', options: [{text: 'Buchführung, Kostenrechnung, Statistik, Planung', correct: true}, {text: 'Nur 2', correct: false}, {text: 'Nur 3', correct: false}], explanation: '✓ Alle 4'},
+                {id: 'k1q5', q: 'ER bedeutet?', options: [{text: 'Eingangsrechnung', correct: true}, {text: 'Einnahmerechnung', correct: false}, {text: 'Erstellungsrechnung', correct: false}], explanation: '✓ ER = Eingangsrechnung'},
+                {id: 'k1q6', q: 'K bedeutet?', options: [{text: 'Kassabeleg', correct: true}, {text: 'Kreditbeleg', correct: false}, {text: 'Kundenbeleg', correct: false}], explanation: '✓ K = Kassabeleg'},
+                {id: 'k1q7', q: 'Kassenstand Start €100, Ende €400. Tageslosung?', options: [{text: '€500', correct: false}, {text: '€300', correct: true}, {text: '€100', correct: false}], explanation: '✓ €300'},
+                {id: 'k1q8', q: 'Indirekte Tageslosung ohne?', options: [{text: 'Registrierkasse', correct: true}, {text: 'Mit Registrierkasse', correct: false}, {text: 'Immer', correct: false}], explanation: '✓ Ohne Registrierkasse'},
+                {id: 'k1q9', q: 'Kassenende €800, Reparatur €50, Entnahme €100, Start €200. TL?', options: [{text: '€450', correct: false}, {text: '€550', correct: true}, {text: '€650', correct: false}], explanation: '✓ €550'},
+                {id: 'k1q10', q: 'Barausgänge sind?', options: [{text: 'Private Entnahmen', correct: false}, {text: 'Bargeldausgaben für Betrieb', correct: true}, {text: 'Bankzahlungen', correct: false}], explanation: '✓ Bargeldausgaben'},
+                {id: 'k1q11', q: 'Taxi €60K, 5J. AfA/Jahr?', options: [{text: '€10K', correct: false}, {text: '€12K', correct: true}, {text: '€15K', correct: false}], explanation: '✓ €12K'},
+                {id: 'k1q12', q: 'Nach 3J Restbuchwert?', options: [{text: '€36K', correct: false}, {text: '€24K', correct: true}, {text: '€12K', correct: false}], explanation: '✓ €24K'},
+                {id: 'k1q13', q: 'Restbuchwert-Formel?', options: [{text: 'Preis − (AfA × J)', correct: true}, {text: 'Preis ÷ J', correct: false}, {text: 'AfA × J', correct: false}], explanation: '✓ Korrekt'},
+                {id: 'k1q14', q: 'Gerät €10K, 4J. AfA?', options: [{text: '€2.5K', correct: true}, {text: '€2K', correct: false}, {text: '€3K', correct: false}], explanation: '✓ €2.5K'},
+                {id: 'k1q15', q: 'AfA bedeutet?', options: [{text: 'Abschreibung für Abnutzung', correct: true}, {text: 'Abrechnung', correct: false}, {text: 'Ausgaben', correct: false}], explanation: '✓ AfA'},
+                {id: 'k1q16', q: 'Einnahmen €180K, Ausgaben €110K, AfA €12K. Gewinn?', options: [{text: '€58K', correct: true}, {text: '€70K', correct: false}, {text: '€68K', correct: false}], explanation: '✓ €58K'},
+                {id: 'k1q17', q: 'Private Entnahme ist?', options: [{text: 'Betriebsausgabe', correct: false}, {text: 'Eigenkapital-Entnahme', correct: true}, {text: 'Steuerbefreit', correct: false}], explanation: '✓ Nicht Betriebsausgabe'},
+                {id: 'k1q18', q: 'Pauschalierung bis?', options: [{text: '€300K', correct: false}, {text: '€420K', correct: true}, {text: '€500K', correct: false}], explanation: '✓ €420K'},
+                {id: 'k1q19', q: 'Kreditrückzahlung ist?', options: [{text: 'Betriebsausgabe', correct: false}, {text: 'Private Ausgabe', correct: true}, {text: 'Steuerbefreit', correct: false}], explanation: '✓ Nur Zinsen abzugsfähig'},
+                {id: 'k1q20', q: 'Bilanzgleichung?', options: [{text: 'Aktiva = Passiva', correct: true}, {text: 'Aktiva + Passiva = 0', correct: false}, {text: 'Gewinn = Bilanz', correct: false}], explanation: '✓ Aktiva = Passiva'},
+                {id: 'k1q21', q: 'Reparatur ist?', options: [{text: 'Betriebsausgabe', correct: true}, {text: 'Investition', correct: false}, {text: 'Abschreibung', correct: false}], explanation: '✓ Betriebsausgabe'},
+                {id: 'k1q22', q: 'Degressive Abschreibung?', options: [{text: 'Gleichmäßig', correct: false}, {text: 'Abnehmend', correct: true}, {text: 'Zunehmend', correct: false}], explanation: '✓ Abnehmend'},
+                {id: 'k1q23', q: 'Nutzung Taxi?', options: [{text: '3J', correct: false}, {text: '5J', correct: true}, {text: '10J', correct: false}], explanation: '✓ 5J'},
+                {id: 'k1q24', q: 'Anlagegut mindestens?', options: [{text: '€500', correct: false}, {text: '€1K', correct: true}, {text: '€100', correct: false}], explanation: '✓ €1K'},
+                {id: 'k1q25', q: 'Start €150, Ende €600. TL?', options: [{text: '€450', correct: true}, {text: '€750', correct: false}, {text: '€150', correct: false}], explanation: '✓ €450'},
+                {id: 'k1q26', q: 'Bareingänge sind?', options: [{text: 'Private Entnahmen', correct: true}, {text: 'Bareinnahmen', correct: false}, {text: 'Bankeinzahlungen', correct: false}], explanation: '✓ Privat'},
+                {id: 'k1q27', q: 'Kassenende €950, Ausgaben €80, Entnahme €150, Start €300. TL?', options: [{text: '€580', correct: false}, {text: '€700', correct: true}, {text: '€630', correct: false}], explanation: '✓ €700'},
+                {id: 'k1q28', q: 'Laptop €2K, 3J, nach 1J?', options: [{text: '€1.333', correct: true}, {text: '€1K', correct: false}, {text: '€667', correct: false}], explanation: '✓ €1.333'},
+                {id: 'k1q29', q: 'Degressive 20%, €5K. J2 AfA?', options: [{text: '€1K', correct: false}, {text: '€800', correct: true}, {text: '€600', correct: false}], explanation: '✓ €800'},
+                {id: 'k1q30', q: 'Private Entnahmen in Jahresrechnung?', options: [{text: 'Abgezogen', correct: false}, {text: 'NICHT abgezogen', correct: true}, {text: 'Ausgabe', correct: false}], explanation: '✓ NICHT abgezogen'},
+                {id: 'k1q31', q: 'Registrierkasse ab?', options: [{text: '€15K (Bar) / €7.5K (Karte)', correct: true}, {text: '€10K', correct: false}, {text: '€50K', correct: false}], explanation: '✓ €15K Bar oder €7.5K Karte'},
+                {id: 'k1q32', q: 'Doppelte Buchführung Pflicht ab?', options: [{text: '€700K/2J ODER €1M ODER GmbH', correct: true}, {text: '€500K', correct: false}, {text: '€300K', correct: false}], explanation: '✓ Korrekte Grenzen'},
+                {id: 'k1q33', q: 'Kleinunternehmer bis?', options: [{text: '€55K', correct: true}, {text: '€100K', correct: false}, {text: '€75K', correct: false}], explanation: '✓ €55K'},
+                {id: 'k1q34', q: 'GWG Grenze?', options: [{text: '€500', correct: false}, {text: '€1K', correct: true}, {text: '€2K', correct: false}], explanation: '✓ €1K'},
+                {id: 'k1q35', q: 'Formvorschriften: warum chronologisch?', options: [{text: 'Um Manipulationen zu verhindern', correct: true}, {text: 'Kosmetisch', correct: false}, {text: 'Keine Gründe', correct: false}], explanation: '✓ Transparenz & Kontrolle'},
+                {id: 'k1q36', q: 'Halbjahrsprinzip: Kauf 1.7, €12K, 4J. AfA 2024?', options: [{text: '€3K', correct: false}, {text: '€1.5K', correct: true}, {text: '€750', correct: false}], explanation: '✓ €1.5K (halbes J)'},
+                {id: 'k1q37', q: 'Taxi-Pauschale?', options: [{text: '10%', correct: false}, {text: '20%', correct: true}, {text: '30%', correct: false}], explanation: '✓ 20%'},
+                {id: 'k1q38', q: 'USt 20%: €1.2K brutto. Netto & USt?', options: [{text: 'Netto €1K, USt €200', correct: true}, {text: 'Netto €960, USt €240', correct: false}, {text: 'Netto €1.2K, USt €240', correct: false}], explanation: '✓ €1K Netto; €200 USt'},
+                {id: 'k1q39', q: 'EAR Gewinnformel?', options: [{text: 'Einnahmen − Ausgaben − AfA = Gewinn', correct: true}, {text: 'Umsatz − Kosten', correct: false}, {text: 'Erlöse − Aufwand', correct: false}], explanation: '✓ Korrekt'},
+                {id: 'k1q40', q: 'TL Komplex: Start €500, Ende €1.2K, Benzin €150, Versicherung €50, Entnahme €200, Reparatur €75?', options: [{text: '€1.575', correct: false}, {text: '€725', correct: true}, {text: '€1.2K', correct: false}], explanation: '✓ €725'},
+            ],
+            2: [ // K2 - 45 Fragen
+                {id: 'k2q1', q: 'Grundprinzip doppelte Buchführung?', options: [{text: 'Jeder Geschäftsvorfall auf zwei Konten', correct: true}, {text: 'Einmal erfasst', correct: false}, {text: 'Keine Regel', correct: false}], explanation: '✓ Grund: Aktiva = Passiva'},
+                {id: 'k2q2', q: 'Aktiva sind?', options: [{text: 'Schulden + Kapital', correct: false}, {text: 'Geld + Vermögenswerte', correct: true}, {text: 'Nur Kredite', correct: false}], explanation: '✓ Vermögensteile'},
+                {id: 'k2q3', q: 'Passiva sind?', options: [{text: 'Nur Schulden', correct: false}, {text: 'EK + FK', correct: true}, {text: 'Nur Vermögen', correct: false}], explanation: '✓ Schulden + EK'},
+                {id: 'k2q4', q: 'Anlagevermögen?', options: [{text: 'Kassa, Bank', correct: false}, {text: 'Taxi, Gebäude, Maschinen', correct: true}, {text: 'Schulden', correct: false}], explanation: '✓ Langfristig'},
+                {id: 'k2q5', q: 'Umlaufvermögen?', options: [{text: 'Taxi, Gebäude', correct: false}, {text: 'Kassa, Bank, Forderungen', correct: true}, {text: 'Kredite', correct: false}], explanation: '✓ Kurzfristig'},
+                {id: 'k2q6', q: 'Saldenliste?', options: [{text: 'Übersicht aller Konten', correct: true}, {text: 'GuV-Rechnung', correct: false}, {text: 'Kreditvertrag', correct: false}], explanation: '✓ Trial Balance'},
+                {id: 'k2q7', q: 'Bilanzsumme?', options: [{text: 'Nur Aktiva', correct: false}, {text: 'Aktiva = Passiva', correct: true}, {text: 'Immer Null', correct: false}], explanation: '✓ Bilanzgleichung'},
+                {id: 'k2q8', q: 'EK erhöht durch?', options: [{text: 'Gewinn', correct: true}, {text: 'Kredit', correct: false}, {text: 'Taxi kaufen', correct: false}], explanation: '✓ Gewinn erhöht EK'},
+                {id: 'k2q9', q: 'EK verringert durch?', options: [{text: 'Verlust', correct: true}, {text: 'Kassa', correct: false}, {text: 'Bank', correct: false}], explanation: '✓ Verlust reduziert EK'},
+                {id: 'k2q10', q: 'FK sind?', options: [{text: 'Schulden gegenüber Dritten', correct: true}, {text: 'Eigenkapital', correct: false}, {text: 'Gewinn', correct: false}], explanation: '✓ Fremdes Kapital'},
+                {id: 'k2q11', q: 'Langfristiges FK?', options: [{text: 'Hypotheken, Darlehen', correct: true}, {text: 'Bankzahlungskredit', correct: false}, {text: 'Kassa', correct: false}], explanation: '✓ > 1J'},
+                {id: 'k2q12', q: 'Kurzfristiges FK?', options: [{text: 'Hypotheken', correct: false}, {text: 'KKK, Lieferantenverbindlichkeit', correct: true}, {text: 'EK', correct: false}], explanation: '✓ < 1J'},
+                {id: 'k2q13', q: 'Bilanzgleichung?', options: [{text: 'Aktiva = Passiva', correct: true}, {text: 'Aktiva + Passiva = 0', correct: false}, {text: 'Aktiva − Passiva = Gewinn', correct: false}], explanation: '✓ Grund'},
+                {id: 'k2q14', q: 'Gewinn ist?', options: [{text: 'Erlöse − Aufwand', correct: true}, {text: 'Aktiva − Passiva', correct: false}, {text: 'Kassa − Bank', correct: false}], explanation: '✓ GuV'},
+                {id: 'k2q15', q: 'Erlöse sind?', options: [{text: 'Einnahmen aus Geschäft', correct: true}, {text: 'Ausgaben', correct: false}, {text: 'Kapital', correct: false}], explanation: '✓ Fahrteinnahmen, Zinsen'},
+                {id: 'k2q16', q: 'Aufwand ist?', options: [{text: 'Alle Betriebskosten', correct: true}, {text: 'Nur Gehälter', correct: false}, {text: 'Bilanz', correct: false}], explanation: '✓ Benzin, Löhne, Versicherung'},
+                {id: 'k2q17', q: 'AfA ist?', options: [{text: 'Verringerung AV-Wert', correct: true}, {text: 'Kreditzahlung', correct: false}, {text: 'Erlös', correct: false}], explanation: '✓ Sys. Abschreibung'},
+                {id: 'k2q18', q: 'Verschuldungsgrad zeigt?', options: [{text: '% FK im Gesamtkapital', correct: true}, {text: 'Gewinn', correct: false}, {text: 'Liquidität', correct: false}], explanation: '✓ (FK × 100) / GK'},
+                {id: 'k2q19', q: 'Liquidität zeigt?', options: [{text: 'Zahlungsfähigkeit', correct: true}, {text: 'Gewinn/Jahr', correct: false}, {text: 'Abschreibung', correct: false}], explanation: '✓ (UV × 100) / KFK'},
+                {id: 'k2q20', q: 'EK-Rentabilität?', options: [{text: 'Gewinn / EK × 100%', correct: true}, {text: 'Erlöse / Aufwand', correct: false}, {text: 'Aktiva / Passiva', correct: false}], explanation: '✓ Gewinnfähigkeit'},
+                {id: 'k2q21', q: 'Gutes VG?', options: [{text: 'Niedrig 30-40%', correct: true}, {text: 'Hoch 80-90%', correct: false}, {text: '50%', correct: false}], explanation: '✓ Weniger Risiko'},
+                {id: 'k2q22', q: 'Gute Liquidität?', options: [{text: '> 100%', correct: true}, {text: '< 50%', correct: false}, {text: '0%', correct: false}], explanation: '✓ UV > KFK'},
+                {id: 'k2q23', q: 'Unterschied Saldenliste/Bilanz?', options: [{text: 'Saldenliste=Konten, Bilanz=Vermögen', correct: true}, {text: 'Identisch', correct: false}, {text: 'Bilanz älter', correct: false}], explanation: '✓ Darstellung'},
+                {id: 'k2q24', q: 'Taxi ist?', options: [{text: 'Anlagevermögen', correct: true}, {text: 'Umlaufvermögen', correct: false}, {text: 'FK', correct: false}], explanation: '✓ Langfristig'},
+                {id: 'k2q25', q: 'Kassa ist?', options: [{text: 'Anlagevermögen', correct: false}, {text: 'Umlaufvermögen', correct: true}, {text: 'EK', correct: false}], explanation: '✓ Bargeld, kurzfristig'},
+                {id: 'k2q26', q: 'Bankguthaben ist?', options: [{text: 'Passiva', correct: false}, {text: 'UV (Aktiva)', correct: true}, {text: 'FK', correct: false}], explanation: '✓ Umlaufvermögen'},
+                {id: 'k2q27', q: 'Hypothek ist?', options: [{text: 'Anlagevermögen', correct: false}, {text: 'EK', correct: false}, {text: 'Langfristiges FK', correct: true}], explanation: '✓ LFK'},
+                {id: 'k2q28', q: 'KKK ist?', options: [{text: 'Anlagevermögen', correct: false}, {text: 'Kurzfristiges FK', correct: true}, {text: 'EK', correct: false}], explanation: '✓ KFK < 1J'},
+                {id: 'k2q29', q: 'Bilanz nicht ausgeglichen?', options: [{text: 'Fehler in Buchführung', correct: true}, {text: 'Profitabel', correct: false}, {text: 'Alles ok', correct: false}], explanation: '✓ Fehler finden'},
+                {id: 'k2q30', q: 'GuV zeigt?', options: [{text: 'Vermögen/Schulden', correct: false}, {text: 'Einnahmen/Ausgaben Periode', correct: true}, {text: 'Nur Gewinne', correct: false}], explanation: '✓ Income Statement'},
+                {id: 'k2q31', q: 'AfA gehört zu?', options: [{text: 'Erlösen', correct: false}, {text: 'Aufwendungen (GuV)', correct: true}, {text: 'EK', correct: false}], explanation: '✓ Aufwand'},
+                {id: 'k2q32', q: 'Zinsen sind?', options: [{text: 'Investition', correct: false}, {text: 'Aufwand in GuV', correct: true}, {text: 'Vermögen', correct: false}], explanation: '✓ Zinsaufwand'},
+                {id: 'k2q33', q: 'Anfangskapital ist?', options: [{text: 'Aufwand', correct: false}, {text: 'EK (Passiva)', correct: true}, {text: 'Erlös', correct: false}], explanation: '✓ Eigenkapital'},
+                {id: 'k2q34', q: 'Privatentnahme reduziert?', options: [{text: 'UV und EK', correct: true}, {text: 'Nur AV', correct: false}, {text: 'FK', correct: false}], explanation: '✓ Beides sinkt'},
+                {id: 'k2q35', q: 'Gewinn erhöht?', options: [{text: 'EK', correct: true}, {text: 'FK', correct: false}, {text: 'AfA', correct: false}], explanation: '✓ EK wächst'},
+                {id: 'k2q36', q: 'EK = ?', options: [{text: 'Vermögen − FK', correct: true}, {text: 'Aktiva + Passiva', correct: false}, {text: 'Gewinn', correct: false}], explanation: '✓ Differenz'},
+                {id: 'k2q37', q: 'Anlagendeckung ideal?', options: [{text: '> 150%', correct: true}, {text: '< 100%', correct: false}, {text: '50%', correct: false}], explanation: '✓ (EK + LFK) × 100 / AV'},
+                {id: 'k2q38', q: 'AV €100K, UV €50K, EK €120K, FK €30K. Gewinn €40K. Neue Aktiva?', options: [{text: '€190K', correct: true}, {text: '€150K', correct: false}, {text: '€160K', correct: false}], explanation: '✓ AV €100K + UV €50K + Gew €40K = €190K'},
+                {id: 'k2q39', q: 'Forderung ist UV?', options: [{text: 'Ja, immer', correct: true}, {text: 'Nein, Passiva', correct: false}, {text: 'Nur langfristig', correct: false}], explanation: '✓ Kundenforderungen'},
+                {id: 'k2q40', q: 'Rückstellung ist?', options: [{text: 'Kurzfristiges FK', correct: true}, {text: 'Eigenkapital', correct: false}, {text: 'Vermögen', correct: false}], explanation: '✓ Verbindlichkeit'},
+                {id: 'k2q41', q: 'Gewinn €50K, EK €100K. EK-Rentabilität?', options: [{text: '50%', correct: true}, {text: '100%', correct: false}, {text: '25%', correct: false}], explanation: '✓ 50 ÷ 100 × 100 = 50%'},
+                {id: 'k2q42', q: 'Cash-flow = Gewinn + AfA. Warum AfA?', options: [{text: 'AfA ist keine Zahlung', correct: true}, {text: 'Rechenregel', correct: false}, {text: 'Immer addieren', correct: false}], explanation: '✓ AfA mindert Gewinn, keine Zahlung'},
+                {id: 'k2q43', q: 'GK-Rentabilität mit Zinsen?', options: [{text: '(Gewinn + Zins) × 100 / GK', correct: true}, {text: 'Nur Gewinn / GK', correct: false}, {text: 'Zins / GK', correct: false}], explanation: '✓ Beide einrechnen'},
+                {id: 'k2q44', q: 'Bilanz ist Momentaufnahme zum?', options: [{text: 'Bilanzstichtag', correct: true}, {text: 'Beliebigen Datum', correct: false}, {text: 'Monatsende', correct: false}], explanation: '✓ Punkt in Zeit'},
+                {id: 'k2q45', q: 'Personalaufwand % ideal?', options: [{text: 'Möglichst niedrig', correct: true}, {text: 'Möglichst hoch', correct: false}, {text: '50%', correct: false}], explanation: '✓ Kostenquote'},
+            ],
+            3: [ // K3 - 25 Fragen
+                {id: 'k3q1', q: 'Lohnverrechnung Basis?', options: [{text: 'Bruttolohn = Bezüge + Zuschläge − Abzüge', correct: true}, {text: 'Nettolohn = Bruttolohn − Steuern', correct: false}, {text: 'LSt = Bruttolohn × 6%', correct: false}], explanation: '✓ Grundformel'},
+                {id: 'k3q2', q: 'Sonderzahlung frei bis?', options: [{text: '€500', correct: false}, {text: '€620', correct: true}, {text: '€1K', correct: false}], explanation: '✓ €620'},
+                {id: 'k3q3', q: 'Erste 15 ÜST Zuschlag?', options: [{text: '50%', correct: true}, {text: '100%', correct: false}, {text: '25%', correct: false}], explanation: '✓ 50%'},
+                {id: 'k3q4', q: 'Weitere ÜST Zuschlag?', options: [{text: '50%', correct: false}, {text: '100%', correct: true}, {text: '75%', correct: false}], explanation: '✓ 100%'},
+                {id: 'k3q5', q: 'Sonntags/Feiertags ÜST?', options: [{text: '50%', correct: false}, {text: '100%', correct: true}, {text: '75%', correct: false}], explanation: '✓ 100%'},
+                {id: 'k3q6', q: 'Pendelerpauschale ist?', options: [{text: 'Pauschale Fahrtkosten', correct: true}, {text: 'ÜST-Zuschlag', correct: false}, {text: 'Versicherung', correct: false}], explanation: '✓ Fahrtkosten-Pauschale'},
+                {id: 'k3q7', q: 'Sachbezüge sind?', options: [{text: 'Nur Geld', correct: false}, {text: 'Geldwerte Vorteile (Auto, Wohnung)', correct: true}, {text: 'Steuern', correct: false}], explanation: '✓ Naturart'},
+                {id: 'k3q8', q: 'Abgaben bezahlen?', options: [{text: 'Monatlich', correct: true}, {text: 'Jährlich', correct: false}, {text: 'Vierteljährlich', correct: false}], explanation: '✓ Monatlich'},
+                {id: 'k3q9', q: 'Abgabenfrist?', options: [{text: 'Bis 5. Monat', correct: false}, {text: 'Bis 15. Monat', correct: true}, {text: 'Bis 20. Monat', correct: false}], explanation: '✓ 15. des Folge-Monats'},
+                {id: 'k3q10', q: 'Höchstbeitragsgrunlage?', options: [{text: '€5K', correct: false}, {text: '€6.930', correct: true}, {text: '€7.5K', correct: false}], explanation: '✓ €6.930'},
+                {id: 'k3q11', q: 'Abgaben an welche Institutionen?', options: [{text: 'Finanzamt, SV, Gemeinde/Stadt', correct: true}, {text: 'Nur Finanzamt', correct: false}, {text: 'Bank + Versicherung', correct: false}], explanation: '✓ Alle drei'},
+                {id: 'k3q12', q: 'Pendelerpauschale ausbezahlt?', options: [{text: 'Ja', correct: false}, {text: 'Nein, mindert nur LSt', correct: true}, {text: 'Nur lange Strecken', correct: false}], explanation: '✓ Nicht ausbezahlt'},
+                {id: 'k3q13', q: 'FB vs FG?', options: [{text: 'FB bis €1.095 frei; FG €1.095−€1.460 Differenz', correct: true}, {text: 'Das Gleiche', correct: false}, {text: 'FB=Steuern, FG=Versicherung', correct: false}], explanation: '✓ Unterschiedlich'},
+                {id: 'k3q14', q: 'DN €10K. Höchstbeitragsgrunlage?', options: [{text: 'Alle auf €10K', correct: false}, {text: 'SV nur bis €6.930', correct: true}, {text: 'Keine Abgaben', correct: false}], explanation: '✓ Grenze beachten'},
+                {id: 'k3q15', q: 'LSt-freie Bezüge?', options: [{text: '€620, ÜST 50% €170, 100% €400, KM', correct: true}, {text: 'Nur Sonderzahlung', correct: false}, {text: 'Alle ÜST', correct: false}], explanation: '✓ Mehrere'},
+                {id: 'k3q16', q: 'Außerbetriebliche Kosten?', options: [{text: 'Kosten außerhalb Betrieb; mit Finanzamt', correct: true}, {text: 'Tägliche Kosten', correct: false}, {text: 'Material', correct: false}], explanation: '✓ Spezielle Abrechnung'},
+                {id: 'k3q17', q: 'Personalnebenkosten bestehen aus?', options: [{text: 'SV + LSt + DB + Kommunalsteuer', correct: true}, {text: 'Nur Gehalt', correct: false}, {text: 'Nur LSt', correct: false}], explanation: '✓ Alle Beiträge'},
+                {id: 'k3q18', q: 'Freibetrag €1.095?', options: [{text: 'KEINE Abgaben', correct: true}, {text: 'Alle berechnet', correct: false}, {text: 'Nur LSt', correct: false}], explanation: '✓ Komplett frei'},
+                {id: 'k3q19', q: 'Freigrenze €1.395?', options: [{text: 'Nichts', correct: false}, {text: 'Differenz: €300', correct: true}, {text: 'Der ganze €1.395', correct: false}], explanation: '✓ €1.395 − €1.095 = €300'},
+                {id: 'k3q20', q: 'Taxi, Lenkerin €2K. Abgaben?', options: [{text: 'Finanzamt, SV, Gemeinde', correct: true}, {text: 'Nur Finanzamt', correct: false}, {text: 'Nur SV', correct: false}], explanation: '✓ Alle drei'},
+                {id: 'k3q21', q: 'Pendelerpauschale wirkt?', options: [{text: 'Reduziert Netto', correct: false}, {text: 'Reduziert nur LSt', correct: true}, {text: 'Reduziert SV', correct: false}], explanation: '✓ Steuer-Reduktion'},
+                {id: 'k3q22', q: 'Sonderzahlung €1K? Rest-Steuer?', options: [{text: 'Keine', correct: false}, {text: '(€1K − €620) × 6% = €22,80', correct: true}, {text: 'Auf €1K: 20%', correct: false}], explanation: '✓ €22,80'},
+                {id: 'k3q23', q: '20 normale + 5 Sonntags ÜST?', options: [{text: '15×50% €170, 5×100% €400', correct: true}, {text: 'Alle 100%', correct: false}, {text: 'Nur 50%', correct: false}], explanation: '✓ Aufteilung'},
+                {id: 'k3q24', q: 'Dienstegeberbeitrag kleiner Unt. €1.095?', options: [{text: '3,70%', correct: false}, {text: '0% (frei)', correct: true}, {text: '1,85%', correct: false}], explanation: '✓ Freibetrag'},
+                {id: 'k3q25', q: 'Personalkosten-Kategorien?', options: [{text: 'Unternehmer, Angestellter, Arbeiter, Lehrling, ohne', correct: true}, {text: 'Nur Unternehmer', correct: false}, {text: 'Nur Arbeiter', correct: false}], explanation: '✓ Alle 5'},
+            ],
+        };
 
-        // ==================== KAPITEL 2 ====================
-        const chapter2Questions = [
-            {id: 'k2q1', q: 'Was ist das Grundprinzip der doppelten Buchführung?', options: [{text: 'Jeder Geschäftsvorfall wird auf zwei Konten erfasst', correct: true}, {text: 'Jeder Vorfall wird nur einmal erfasst', correct: false}, {text: 'Es gibt keine feste Regel', correct: false}], explanation: '✓ Das Grundprinzip: Aktiva = Passiva (Bilanzprinzip)'},
-            {id: 'k2q2', q: 'Aktiva (Vermögen) sind:', options: [{text: 'Schulden und Kapital', correct: false}, {text: 'Geld und Vermögenswerte', correct: true}, {text: 'Nur Kredite', correct: false}], explanation: '✓ Aktiva = Vermögensteile (Taxi, Kassa, Bank)'},
-            {id: 'k2q3', q: 'Passiva (Kapital) sind:', options: [{text: 'Nur Schulden', correct: false}, {text: 'Eigenkapital + Fremdkapital', correct: true}, {text: 'Nur Vermögen', correct: false}], explanation: '✓ Passiva = Schulden und Eigenkapital'},
-            {id: 'k2q4', q: 'Anlagevermögen ist:', options: [{text: 'Kassa und Bank', correct: false}, {text: 'Langfristige Vermögenswerte (Taxi, Gebäude)', correct: true}, {text: 'Kurzfristige Schulden', correct: false}], explanation: '✓ Anlagevermögen: Taxi, Gebäude, Maschinen (> 1 Jahr)'},
-            {id: 'k2q5', q: 'Umlaufvermögen ist:', options: [{text: 'Taxi und Gebäude', correct: false}, {text: 'Kassa, Bank, Kundenforderungen', correct: true}, {text: 'Nur Kredite', correct: false}], explanation: '✓ Umlaufvermögen: Kassa, Bank, Material (< 1 Jahr)'},
-            {id: 'k2q6', q: 'Was ist eine Saldenliste?', options: [{text: 'Eine Übersicht aller Konten mit Salden', correct: true}, {text: 'Eine Gewinn-Verlust-Rechnung', correct: false}, {text: 'Ein Kreditvertrag', correct: false}], explanation: '✓ Saldenliste = Trial Balance, zeigt Soll und Haben'},
-            {id: 'k2q7', q: 'Die Bilanzsumme muss:', options: [{text: 'Nur auf der Aktiva-Seite stimmen', correct: false}, {text: 'Auf beiden Seiten gleich sein (Aktiva = Passiva)', correct: true}, {text: 'Immer null sein', correct: false}], explanation: '✓ Bilanzsumme Aktiva MUSS Bilanzsumme Passiva entsprechen'},
-            {id: 'k2q8', q: 'Eigenkapital wird erhöht durch:', options: [{text: 'Gewinn', correct: true}, {text: 'Kredit aufnehmen', correct: false}, {text: 'Taxi kaufen', correct: false}], explanation: '✓ Gewinn erhöht das Eigenkapital'},
-            {id: 'k2q9', q: 'Eigenkapital wird verringert durch:', options: [{text: 'Verlust', correct: true}, {text: 'Kassa erhöhen', correct: false}, {text: 'Bank überweisen', correct: false}], explanation: '✓ Verlust verringert das Eigenkapital'},
-            {id: 'k2q10', q: 'Fremdkapital ist:', options: [{text: 'Schulden gegenüber Dritten', correct: true}, {text: 'Das Eigenkapital', correct: false}, {text: 'Der Gewinn', correct: false}], explanation: '✓ Fremdkapital = Kredite, Lieferantenverbindlichkeiten'},
-            {id: 'k2q11', q: 'Langfristiges Fremdkapital sind:', options: [{text: 'Hypotheken und Darlehen', correct: true}, {text: 'Bankzahlungskredit', correct: false}, {text: 'Kassa-Einzahlungen', correct: false}], explanation: '✓ Langfristig FK: Hypothek, Darlehen (> 1 Jahr)'},
-            {id: 'k2q12', q: 'Kurzfristiges Fremdkapital sind:', options: [{text: 'Hypotheken', correct: false}, {text: 'Bankzahlungskredit und Lieferantenverbindlichkeiten', correct: true}, {text: 'Eigenkapital', correct: false}], explanation: '✓ Kurzfristig FK: Kontokorrentkredit, Lieferantenverbindlichkeit'},
-            {id: 'k2q13', q: 'Die Bilanzgleichung ist:', options: [{text: 'Aktiva = Passiva', correct: true}, {text: 'Aktiva + Passiva = 0', correct: false}, {text: 'Aktiva - Passiva = Gewinn', correct: false}], explanation: '✓ Aktiva (Vermögen) = Passiva (Schulden + Kapital)'},
-            {id: 'k2q14', q: 'Gewinn ist die Differenz zwischen:', options: [{text: 'Erlöse - Aufwand', correct: true}, {text: 'Aktiva - Passiva', correct: false}, {text: 'Kassa - Bank', correct: false}], explanation: '✓ Gewinn = Erlöse minus Aufwand'},
-            {id: 'k2q15', q: 'Erlöse sind:', options: [{text: 'Die Einnahmen aus Geschäftstätigkeit', correct: true}, {text: 'Die Ausgaben', correct: false}, {text: 'Das Kapital', correct: false}], explanation: '✓ Erlöse = Fahrteinnahmen, Zinserträge'},
-            {id: 'k2q16', q: 'Aufwand ist:', options: [{text: 'Alle Ausgaben für Betriebstätigkeit', correct: true}, {text: 'Nur Gehälter', correct: false}, {text: 'Die Bilanz', correct: false}], explanation: '✓ Aufwand: Benzin, Löhne, Versicherung, Reparaturen'},
-            {id: 'k2q17', q: 'Abschreibung (AfA) ist:', options: [{text: 'Die systematische Verringerung des Wertes von Anlagevermögen', correct: true}, {text: 'Die Bezahlung eines Kredits', correct: false}, {text: 'Ein Erlös', correct: false}], explanation: '✓ AfA verteilt die Kosten des Taxis über Jahre'},
-            {id: 'k2q18', q: 'Verschuldungsgrad zeigt:', options: [{text: 'Wie viel % Fremdkapital im Gesamtkapital ist', correct: true}, {text: 'Den Gewinn', correct: false}, {text: 'Die Liquidität', correct: false}], explanation: '✓ Verschuldungsgrad = (FK × 100) / Gesamtkapital'},
-            {id: 'k2q19', q: 'Liquidität zeigt:', options: [{text: 'Die Zahlungsfähigkeit', correct: true}, {text: 'Den Gewinn pro Jahr', correct: false}, {text: 'Die Abschreibung', correct: false}], explanation: '✓ Liquidität = (Umlaufvermögen × 100) / Kurzfristiges FK'},
-            {id: 'k2q20', q: 'Eigenkapitalrentabilität ist:', options: [{text: 'Gewinn / Eigenkapital × 100%', correct: true}, {text: 'Erlöse / Aufwand', correct: false}, {text: 'Aktiva / Passiva', correct: false}], explanation: '✓ Rentabilität zeigt Gewinnfähigkeit'},
-            {id: 'k2q21', q: 'Ein ideales Verschuldungsgrad wäre:', options: [{text: 'Möglichst niedrig (zB 30-40%)', correct: true}, {text: 'Möglichst hoch (zB 80-90%)', correct: false}, {text: 'Immer 50%', correct: false}], explanation: '✓ Niedrig Verschuldungsgrad = weniger Risiko'},
-            {id: 'k2q22', q: 'Eine gute Liquidität wäre:', options: [{text: 'Höher als 100% (ideales Umlaufvermögen > kurzfr. FK)', correct: true}, {text: 'Unter 50%', correct: false}, {text: '0%', correct: false}], explanation: '✓ Liquidität > 100% = ausreichend Zahlungsfähigkeit'},
-            {id: 'k2q23', q: 'Saldenliste und Bilanz unterscheiden sich in:', options: [{text: 'Saldenliste zeigt Konten, Bilanz zeigt Vermögen/Schulden', correct: true}, {text: 'Sie sind identisch', correct: false}, {text: 'Bilanz ist älter', correct: false}], explanation: '✓ Saldenliste = chronologisch, Bilanz = Vermögen/Schulden'},
-            {id: 'k2q24', q: 'Das Taxi ist ein:', options: [{text: 'Anlagevermögen', correct: true}, {text: 'Umlaufvermögen', correct: false}, {text: 'Fremdkapital', correct: false}], explanation: '✓ Taxi ist Anlagevermögen (langfristig, wird abgeschrieben)'},
-            {id: 'k2q25', q: 'Kassa ist ein:', options: [{text: 'Anlagevermögen', correct: false}, {text: 'Umlaufvermögen', correct: true}, {text: 'Eigenkapital', correct: false}], explanation: '✓ Kassa ist Umlaufvermögen (kurzfristig, Bargeld)'},
-            {id: 'k2q26', q: 'Bankguthaben ist ein:', options: [{text: 'Passiva', correct: false}, {text: 'Umlaufvermögen (Aktiva)', correct: true}, {text: 'Fremdkapital', correct: false}], explanation: '✓ Bankguthaben = Umlaufvermögen'},
-            {id: 'k2q27', q: 'Hypothekenkredit ist ein:', options: [{text: 'Anlagevermögen', correct: false}, {text: 'Eigenkapital', correct: false}, {text: 'Langfristiges Fremdkapital (Passiva)', correct: true}], explanation: '✓ Hypothek = Langfristiges Fremdkapital'},
-            {id: 'k2q28', q: 'Kontokorrentkredit (KKK) ist ein:', options: [{text: 'Anlagevermögen', correct: false}, {text: 'Kurzfristiges Fremdkapital', correct: true}, {text: 'Eigenkapital', correct: false}], explanation: '✓ KKK ist Kurzfristiges Fremdkapital (bis 1 Jahr)'},
-            {id: 'k2q29', q: 'Ist die Bilanz nicht ausgeglichen, deutet das auf:', options: [{text: 'Fehler in der Buchführung', correct: true}, {text: 'Dass das Unternehmen profitabel ist', correct: false}, {text: 'Alles ist in Ordnung', correct: false}], explanation: '✓ Bilanzausgleich ist essentiell - Fehler müssen gefunden werden'},
-            {id: 'k2q30', q: 'Die GuV-Rechnung zeigt:', options: [{text: 'Vermögen und Schulden', correct: false}, {text: 'Einnahmen und Ausgaben für eine Periode', correct: true}, {text: 'Nur Gewinne', correct: false}], explanation: '✓ GuV = Gewinn und Verlust Rechnung (Income Statement)'},
-            {id: 'k2q31', q: 'Abschreibung gehört zu:', options: [{text: 'Den Erlösen', correct: false}, {text: 'Den Aufwendungen (GuV)', correct: true}, {text: 'Dem Eigenkapital', correct: false}], explanation: '✓ AfA ist Aufwand in der GuV-Rechnung'},
-            {id: 'k2q32', q: 'Zinsen für einen Kredit sind:', options: [{text: 'Eine Investition', correct: false}, {text: 'Ein Aufwand (gehört zur GuV)', correct: true}, {text: 'Vermögen', correct: false}], explanation: '✓ Zinsen = Aufwand in der GuV'},
-            {id: 'k2q33', q: 'Das Anfangskapital eines Unternehmers ist:', options: [{text: 'Ein Aufwand', correct: false}, {text: 'Eigenkapital (Passiva)', correct: true}, {text: 'Ein Erlös', correct: false}], explanation: '✓ Anfangskapital = Eigenkapital auf der Passiva-Seite'},
-            {id: 'k2q34', q: 'Eine Privatentnahme reduziert:', options: [{text: 'Das Umlaufvermögen und das Eigenkapital', correct: true}, {text: 'Nur das Anlagevermögen', correct: false}, {text: 'Das Fremdkapital', correct: false}], explanation: '✓ Privatentnahme: Kassa ↓ und EK ↓'},
-            {id: 'k2q35', q: 'Der Gewinn erhöht:', options: [{text: 'Das Eigenkapital', correct: true}, {text: 'Das Fremdkapital', correct: false}, {text: 'Die Abschreibung', correct: false}], explanation: '✓ Gewinn → EK ↑ (bilanzwirksam)'}
-        ];
+        // ==================== 30 SCHWERE AUFGABEN ====================
+        const exercises = {
+            1: [ // K1 Aufgaben
+                {id: 'k1ex1', level: '⭐', title: 'Tageslosung einfach', q: 'Start €200, Ende €800. Tageslosung?', sol: '€800 − €200 = <b>€600</b>', f: 'Direkt: Ende − Start'},
+                {id: 'k1ex2', level: '⭐⭐', title: 'AfA linear', q: 'Taxi €60K, 5J. Jahres-AfA?', sol: '€60K ÷ 5 = <b>€12K</b>', f: 'Preis ÷ Jahre'},
+                {id: 'k1ex3', level: '⭐⭐⭐', title: 'Tageslosung komplex', q: 'Ende €950, Benzin €80, Reparatur €75, Entnahme €200, Start €500. TL?', sol: '€950 + €80 + €75 − €200 − €500 = <b>€405</b>', f: 'Ende + Ausgänge − Eingänge − Start'},
+                {id: 'k1ex4', level: '⭐⭐⭐', title: 'Restbuchwert', q: 'Taxi €60K, 5J, nach 3J?', sol: '€60K − (€12K × 3) = <b>€24K</b>', f: 'Preis − (AfA × Jahre)'},
+                {id: 'k1ex5', level: '⭐⭐⭐⭐', title: 'Jahresgewinn', q: 'Einnahmen €200K | Ausgaben €120K | AfA €15K | Entnahme €8K. Gewinn?', sol: '€200K − €120K − €15K = <b>€65K</b> (Entnahme NICHT abgezogen)', f: 'Gewinn = Einnahmen − Ausgaben − AfA'},
+                {id: 'k1ex6', level: '⭐⭐⭐⭐⭐', title: 'Degressive AfA', q: 'Gerät €5K, degr. 20%. AfA J1, J2, J3?', sol: 'J1: €1K | J2: €800 | J3: €640', f: 'Degr. AfA = Restbuchwert × 20%'},
+                {id: 'k1ex7', level: '⭐⭐⭐⭐⭐', title: 'Halbjahrsprinzip', q: 'Kauf 1.7, €12K, 4J. AfA 2024?', sol: '€12K ÷ 4 ÷ 2 = <b>€1.500</b>', f: 'Jahres-AfA ÷ 2'},
+                {id: 'k1ex8', level: '⭐⭐⭐⭐⭐', title: 'USt-Berechnung', q: '€1.2K brutto (20% USt). Netto + USt?', sol: '€1.2K ÷ 1,2 = €1K Netto | €1.2K − €1K = <b>€200 USt</b>', f: 'Netto = Brutto ÷ 1,2'},
+                {id: 'k1ex9', level: '⭐⭐⭐⭐⭐', title: 'Pauschalierung', q: 'Taxi-Umsatz €400K. Ausgabenpauschale?', sol: '€400K × 20% = <b>€80K</b>', f: 'Taxi-Pauschale = Umsatz × 20%'},
+                {id: 'k1ex10', level: '⭐⭐⭐⭐⭐', title: 'Komplexe Jahresrechnung', q: 'Fahrteinnahmen €150K | Reparatur €12K | Benzin €20K | Versicherung €8K | AfA €15K | Entnahme €10K. Gewinn?', sol: '€150K − €12K − €20K − €8K − €15K = <b>€95K</b>', f: 'Gewinn = Einnahmen − Ausgaben − AfA'},
+            ],
+            2: [ // K2 Aufgaben
+                {id: 'k2ex1', level: '⭐', title: 'Bilanzgleichung', q: 'AV €100K, UV €50K, EK €120K. FK?', sol: 'FK = €100K + €50K − €120K = <b>€30K</b>', f: 'Aktiva = Passiva'},
+                {id: 'k2ex2', level: '⭐⭐', title: 'Verschuldungsgrad', q: 'FK €40K, GK €100K. VG?', sol: '(€40K × 100) / €100K = <b>40%</b>', f: 'VG = (FK × 100) / GK'},
+                {id: 'k2ex3', level: '⭐⭐', title: 'EK-Rentabilität', q: 'Gewinn €25K, EK €100K. Rentabilität?', sol: '(€25K × 100) / €100K = <b>25%</b>', f: 'EK-Rent = (Gewinn × 100) / EK'},
+                {id: 'k2ex4', level: '⭐⭐⭐', title: 'Liquidität', q: 'UV €60K, KFK €40K. Liquidität?', sol: '(€60K × 100) / €40K = <b>150%</b>', f: '(UV × 100) / KFK'},
+                {id: 'k2ex5', level: '⭐⭐⭐', title: 'Bilanzveränderung', q: 'AV €300K, UV €100K, EK €300K, FK €100K. Gewinn +€40K. Neue EK?', sol: 'EK_neu = €300K + €40K = <b>€340K</b>', f: 'Gewinn erhöht EK und Aktiva'},
+                {id: 'k2ex6', level: '⭐⭐⭐⭐', title: 'Anlagendeckung', q: 'AV €500K, EK €300K, LFK €100K. Anlagendeckung?', sol: '((€300K + €100K) × 100) / €500K = <b>80%</b> (SCHLECHT!)', f: '(EK + LFK) × 100 / AV'},
+                {id: 'k2ex7', level: '⭐⭐⭐⭐', title: 'Eigenkapital', q: 'Vermögen €600K, FK €220K. EK?', sol: 'EK = €600K − €220K = <b>€380K</b>', f: 'EK = Vermögen − FK'},
+                {id: 'k2ex8', level: '⭐⭐⭐⭐⭐', title: 'Cash-Flow', q: 'Gewinn €50K, AfA €15K. Cash-flow?', sol: 'CF = €50K + €15K = <b>€65K</b>', f: 'CF = Gewinn + AfA'},
+                {id: 'k2ex9', level: '⭐⭐⭐⭐⭐', title: 'GK-Rentabilität', q: 'Gewinn €30K, Zinsen €5K, GK €200K. GK-Rent?', sol: '((€30K + €5K) × 100) / €200K = <b>17,5%</b>', f: '(Gewinn + Zinsen) × 100 / GK'},
+                {id: 'k2ex10', level: '⭐⭐⭐⭐⭐', title: 'Bilanzanalyse', q: 'AV €600K, UV €300K, EK €700K, LFK €150K, KFK €50K. Alle 4 Kennzahlen?', sol: 'VG: 23% | Anl-Deck: 142% | Liq: 600% | Analysieren systematisch', f: 'Alle berechnen und interpretieren'},
+            ],
+            3: [ // K3 Aufgaben (mit personalrechung.png Daten)
+                {id: 'k3ex1', level: '⭐', title: 'Sonderzahlung versteuern', q: 'Sonderzahlung €700, frei bis €620. Steuern?', sol: '(€700 − €620) × 6% = €80 × 6% = <b>€4,80</b>', f: '(Sonderzahlung − €620) × 6%'},
+                {id: 'k3ex2', level: '⭐⭐', title: 'Überstunden 50%+100%', q: '10 normale + 6 weitere ÜST. Brutto-ÜST bei €2K/Monat? (ÜST-Teiler 160h)', sol: 'NÜST (€2K÷160×10×1,5): €187,50 | WÜST (€2K÷160×6×2): €150 | Ges: <b>€337,50</b>', f: '1. Teil: erste 15×50% | 2. Teil: ab 15×100%'},
+                {id: 'k3ex3', level: '⭐⭐⭐', title: 'Freibetrag vs Freigrenze', q: 'DN €1.050/Mo. DB 3,70%, DZ 0,36%, Komm 3%. Abgaben?', sol: 'FREIGRENZE: (€1.050 − €1.095) = nur €50−€1.095 frei, Rest = 0 ODER (€1.050 − €1000 FB) = €50 × 7,06% = <b>€3,53</b>', f: 'FB: €1.095=0% | FG: €1.095−€1.460, nur Diff'},
+                {id: 'k3ex4', level: '⭐⭐⭐', title: 'Höchstbeitragsgrunlage', q: 'DN €7.5K/Mo. SV-Beiträge auf welcher Basis? (Höchst: €6.930)', sol: 'NUR auf €6.930 (Höchstbeitragsgrunlage) | Rest €570 = <b>ABGABENFREI</b>', f: 'SV-Beiträge max €6.930'},
+                {id: 'k3ex5', level: '⭐⭐⭐⭐', title: 'Komplette Lohnabrechnung', q: 'Laufender €2.5K, 8×ÜST 50%, 2×Sonntag 100%, Sonderzahlung €500. SV ~13,8%, LSt ~8%. Netto? (ÜST-Teiler 160h)', sol: 'Brutto: €2.5K + (€2.5K÷160×8×1.5) + (€2.5K÷160×2×2) + €500 = €3.131,25 | SV: €432 | LSt: €250 | <b>Netto ≈ €2.449</b>', f: 'Brutto − SV − LSt = Netto'},
+                {id: 'k3ex6', level: '⭐⭐⭐⭐⭐', title: 'Pendelerpauschale-Wirkung', q: 'Brutto €2.8K, PP €350. LSt normal €190. Mit PP?', sol: 'Pauschale mindert NUR LSt (NICHT Auszahlung!) | LSt_neu ≈ €190 − €350 = <b>0 LSt</b> | Auszahlung bleibt €2.8K!', f: 'Pauschale reduziert LSt direkt, nicht Netto'},
+                {id: 'k3ex7', level: '⭐⭐⭐⭐⭐', title: 'Tarifzonen-Berechnung', q: 'DN wohnt 55km. Klein-PP: 40−60km = €214/Mo. Brutto €2K. DB 3,70% + DZ 0,36%. AG-Kosten?', sol: 'DB: €2K × 3,70% = €74 | DZ: €2K × 0,36% = €7,20 | Ges: <b>€81,20/Mo</b>', f: 'AG trägt DB + DZ auf Brutto'},
+                {id: 'k3ex8', level: '⭐⭐⭐⭐⭐', title: 'Kleinunternehmer-Grenze', q: 'Mini-Job €1.1K/Mo. Abgaben? DB 3,70%, DZ 0,36%, Komm 3%. (FB: €1.095, FG: €1.095−€1.460)', sol: 'FREIGRENZE! (€1.1K − €1.095) = €5 × 7,06% = <b>€0,35</b> (fast nichts!)', f: 'Bis €1.095 FREI | €1.095−€1.460: nur Differenz'},
+                {id: 'k3ex9', level: '⭐⭐⭐⭐⭐', title: 'Jahresabrechnung-Freigrenze', q: 'Jan−Nov: €900/Mo. Dez (13. Gehalt): €2.5K. Abgaben? (DB+DZ+Komm ~7,06%)', sol: 'Monatlich €900 = FB (0%) | Dez €2.5K = FG, (€2.5K − €1.460) × 7,06% ≈ €73 | <b>Jahresabgaben ≈ €73</b>', f: 'Variiert monatlich, Jahresverrechnung'},
+                {id: 'k3ex10', level: '⭐⭐⭐⭐⭐', title: 'Personalkosten-Kalkulation', q: 'Unternehmer braucht €3K Netto. Wie viel Brutto mit Abgaben? (AN: LSt+SV ≈21%, AG: +17% zusätzlich)', sol: 'Netto €3K → Brutto ≈ €3K÷0,79 ≈ €3.797 | AG-Kosten: €3.797 × 1,17 ≈ <b>€4.442/Monat</b> Gesamtkosten', f: 'Kosten = Netto÷(1−SV%)×(1+AG%)'},
+            ],
+        };
 
-        // ==================== KAPITEL 1 AUFGABEN ====================
-        const chapter1Exercises = [
-            {id: 'k1ex1', level: 'Einfach', title: 'Indirekte Tageslosung', description: 'Kassenendbestand: €800, Reparatur: €50, Entnahme: €100, Kassenstart: €200', solution: '€800 + €50 − €100 − €200 = <strong>€550</strong>', formula: 'Tageslosung = Kassenende + Barausgänge − Bareingänge − Kassenstart', steps: '1) Addiere: €800 + €50 = €850<br/>2) Subtrahiere: €850 − €100 = €750<br/>3) Subtrahiere: €750 − €200 = €550'},
-            {id: 'k1ex2', level: 'Einfach', title: 'Jahres-Abschreibung', description: 'Taxi kostet €60.000, Nutzungsdauer 5 Jahre', solution: '€60.000 ÷ 5 = <strong>€12.000</strong>', formula: 'Jahres-AfA = Anschaffungspreis ÷ Nutzungsdauer', steps: '1) Teile den Preis durch die Jahre<br/>2) €60.000 ÷ 5 = €12.000<br/>3) Das ist die jährliche Abschreibung'},
-            {id: 'k1ex3', level: 'Einfach', title: 'Restbuchwert berechnen', description: 'Gleiches Taxi (€60.000, 5 Jahre) nach 3 Jahren', solution: '€60.000 − (€12.000 × 3) = €60.000 − €36.000 = <strong>€24.000</strong>', formula: 'Restbuchwert = Anschaffungspreis − (Jahres-AfA × Jahre)', steps: '1) Berechne Gesamtabschreibung: €12.000 × 3 = €36.000<br/>2) Subtrahiere vom Original: €60.000 − €36.000 = €24.000'},
-            {id: 'k1ex4', level: 'Mittel', title: 'Jahresgewinn berechnen', description: 'Betriebseinnahmen: €46.700, Betriebsausgaben: €24.250, Abschreibung: €8.600', solution: 'Gewinn = €46.700 − €24.250 − €8.600 = <strong>€13.850</strong>', formula: 'Gewinn = Einnahmen − Betriebsausgaben − Abschreibung', steps: '1) Subtrahiere Ausgaben: €46.700 − €24.250 = €22.450<br/>2) Subtrahiere Abschreibung: €22.450 − €8.600 = €13.850'},
-            {id: 'k1ex5', level: 'Mittel', title: 'Degressive Abschreibung', description: 'Gerät €5.000, 5 Jahre Nutzung, Degressive 20%. AfA für Jahr 2?', solution: 'Jahr 1: €5.000 × 20% = €1.000 | Restbuchwert: €4.000<br/>Jahr 2: €4.000 × 20% = <strong>€800</strong>', formula: 'Degressive AfA = Restbuchwert × 20%', steps: '1) Jahr 1: €5.000 × 0,20 = €1.000<br/>2) Neue Basis: €5.000 − €1.000 = €4.000<br/>3) Jahr 2: €4.000 × 0,20 = €800'},
-            {id: 'k1ex6', level: 'Schwer', title: 'Verkauf eines Anlageguts', description: 'Taxi gekauft €40.000 (2018), verkauft (2022) für €15.000. Gewinn/Verlust?', solution: 'Jahres-AfA: €40.000 ÷ 5 = €8.000<br/>Nach 4 Jahren: €40.000 − (€8.000 × 4) = €8.000<br/>Gewinn = €15.000 − €8.000 = <strong>€7.000</strong>', formula: 'Gewinn/Verlust = Verkaufspreis − Restbuchwert', steps: '1) Berechne Restbuchwert nach 4 Jahren<br/>2) Vergleiche mit Verkaufspreis<br/>3) Differenz = Gewinn oder Verlust'},
-            {id: 'k1ex7', level: 'Schwer', title: 'Gemischte Nutzung', description: 'Auto €30.000, 5 Jahre, 80% Taxi, 20% privat. Absetzbare AfA?', solution: 'Jahres-AfA: €30.000 ÷ 5 = €6.000<br/>AfA für Betrieb: €6.000 × 80% = <strong>€4.800</strong>', formula: 'Absetzbare AfA = Jahres-AfA × (% Betriebsnutzung)', steps: '1) Berechne normale AfA: €30.000 ÷ 5 = €6.000<br/>2) Multipliziere mit Betriebsanteil: €6.000 × 0,80 = €4.800<br/>3) Nur €4.800 können abgesetzt werden'},
-            {id: 'k1ex8', level: 'Schwer', title: 'Vollständige Jahresrechnung', description: 'Einnahmen (Taxi): €50.000, Autoverkauf: €8.000, Ausgaben: €16.000, AfA: €12.000, Privatentnahme: €5.000', solution: 'Einnahmen: €50.000 + €8.000 = €58.000<br/>Ausgaben: €16.000 + €12.000 = €28.000<br/>Gewinn = €58.000 − €28.000 = <strong>€30.000</strong><br/>(Private Entnahme nicht abgezogen)', formula: 'Gewinn = Einnahmen − Ausgaben − AfA', steps: '1) Addiere Einnahmen: €58.000<br/>2) Addiere Ausgaben: €28.000<br/>3) Subtrahiere: €58.000 − €28.000 = €30.000'},
-            {id: 'k1ex9', level: 'Schwer', title: 'Abschreibungstabelle (5 Jahre)', description: 'Gerät €10.000, 5 Jahre Linear', solution: 'Jahres-AfA: €10.000 ÷ 5 = €2.000<br/>J1-J5: Jedes Jahr €2.000<br/>Nach 5 Jahren: €0', formula: 'Linear: Jedes Jahr derselbe Betrag', steps: '1) Berechne Jahres-AfA<br/>2) Ziehe jedes Jahr denselben Betrag ab<br/>3) Nach 5 Jahren ist das Gerät vollständig abgeschrieben'},
-            {id: 'k1ex10', level: 'Schwer', title: 'Teiljährliche Abschreibung', description: 'Gekauft 1.7.2022 (€12.000), 4 Jahre. AfA für 2022?', solution: 'Jahres-AfA: €12.000 ÷ 4 = €3.000<br/>Monate: 6 Monate<br/>2022 AfA: €3.000 × (6÷12) = <strong>€1.500</strong>', formula: 'Teiljährlich = (Monate ÷ 12) × Jahres-AfA', steps: '1) Jahres-AfA: €3.000<br/>2) 6 Monate = 6/12<br/>3) €3.000 × 0,5 = €1.500'},
-            {id: 'k1ex11', level: 'Schwer', title: 'Mehrere Anlagegüter', description: 'Taxi (2021): €60.000, 5 Jahre; Laptop (2022): €2.000, 3 Jahre. Abschreibung 2024?', solution: 'Taxi: €60.000 ÷ 5 = €12.000/J<br/>Laptop: €2.000 ÷ 3 ≈ €667/J<br/>Gesamt 2024: €12.000 + €667 = <strong>€12.667</strong>', formula: 'Gesamt-AfA = Summe aller Einzelabschreibungen', steps: '1) Berechne AfA für jedes Gerät<br/>2) Prüfe, ob noch in Nutzung<br/>3) Addiere: €12.000 + €667'},
-            {id: 'k1ex12', level: 'Schwer', title: 'Reparatur vs. Investition', description: 'Auto-Reparatur kostet €1.500 (nur Reparatur)', solution: '<strong>BETRIEBSAUSGABE</strong><br/>Normale Reparaturen: sofort absetzbar<br/>Investitionen/Upgrades: Abschreibung über Jahre', formula: 'Reparatur = sofortige Betriebsausgabe / Verbesserung = Abschreibung', steps: '1) Normale Reparaturen: sofort<br/>2) Nur Verbesserungen: Abschreibung<br/>3) Hier: normale Wartung = Ausgabe'},
-            {id: 'k1ex13', level: 'Schwer', title: 'Private vs. Geschäftsausgaben', description: 'Jahresausgaben: €100.000 (mit Privatentnahme €15.000)', solution: 'Ausgaben: €100.000<br/>− Private Entnahme: €15.000<br/>= Betriebsausgaben: <strong>€85.000</strong>', formula: 'Abzugsfähig = Betriebsausgaben (NICHT private)', steps: '1) Identifiziere private Entnahmen<br/>2) Ziehe diese ab<br/>3) Das Ergebnis sind Betriebsausgaben'},
-            {id: 'k1ex14', level: 'Schwer', title: 'Tageslosung mit Mehrfachen', description: 'Start: €300, Ende: €950, Benzin: €80, Versicherung: €120, Entnahme: €150', solution: '€950 + €80 + €120 − €150 − €300 = <strong>€700</strong>', formula: 'Tageslosung = Ende + Ausgänge − Eingänge − Start', steps: '1) Addiere Ausgaben: €80 + €120 = €200<br/>2) €950 + €200 = €1.150<br/>3) €1.150 − €150 − €300 = €700'},
-            {id: 'k1ex15', title: 'Komplette Jahresberechnung', level: 'Schwer', description: 'Fahrteinnahmen: €55.000, Ersatzteil: €3.000, Diesel: €8.000, Versicherung: €4.500, Werkstatt: €3.500, AfA: €12.000, Entnahme: €5.000', solution: 'Einnahmen: €55.000 + €3.000 = €58.000<br/>Ausgaben: €8.000 + €4.500 + €3.500 + €12.000 = €28.000<br/>Gewinn: €58.000 − €28.000 = <strong>€30.000</strong>', formula: 'Gewinn = Einnahmen − Ausgaben (NICHT private)', steps: '1) Addiere Einnahmen: €58.000<br/>2) Addiere Ausgaben: €28.000<br/>3) Gewinn = €30.000'}
-        ];
-
-        // ==================== KAPITEL 2 AUFGABEN ====================
-        const chapter2Exercises = [
-            {id: 'k2ex1', level: 'Einfach', title: 'Bilanz auswerten', description: 'Aktiva: €100.000 | Passiva: €100.000 | EK: €60.000 | FK: €40.000. Ist die Bilanz ausgeglichen?', solution: 'JA, die Bilanz ist ausgeglichen: Aktiva (100.000) = Passiva (60.000 + 40.000)', formula: 'Bilanzgleichung: Aktiva = Passiva', steps: 'Addiere EK + FK = 60.000 + 40.000 = 100.000 | Vergleiche mit Aktiva: 100.000 = 100.000 ✓'},
-            {id: 'k2ex2', level: 'Einfach', title: 'Verschuldungsgrad berechnen', description: 'FK: €30.000 | Gesamtkapital: €100.000. Berechne Verschuldungsgrad.', solution: '(30.000 × 100) / 100.000 = 30%', formula: 'Verschuldungsgrad = (FK × 100) / Gesamtkapital', steps: '30.000 ÷ 100.000 = 0,30 | × 100 = 30%'},
-            {id: 'k2ex3', level: 'Einfach', title: 'Eigenkapitalrentabilität', description: 'Gewinn: €20.000 | EK: €80.000. Berechne die Rentabilität.', solution: '(20.000 × 100) / 80.000 = 25%', formula: 'Rentabilität = (Gewinn × 100) / EK', steps: '20.000 ÷ 80.000 = 0,25 | × 100 = 25%'},
-            {id: 'k2ex4', level: 'Mittel', title: 'Bilanz nach Gewinn anpassen', description: 'Bilanz vorher: AV €60K | UV €40K | EK €70K | FK €30K. Gewinn: €20K. Neue Bilanz?', solution: 'Neue Bilanz: Aktiva €120K | Passiva: EK €90K + FK €30K = €120K', formula: 'Gewinn erhöht Eigenkapital: EK_neu = €70K + €20K', steps: 'AV €60K + UV €40K = €100K Aktiva | EK: €70K + €20K = €90K | FK bleibt €30K | Neue Gesamtsumme: €120K'},
-            {id: 'k2ex5', level: 'Mittel', title: 'Liquidität berechnen', description: 'Umlaufvermögen: €50.000 | Kurzfristiges FK: €40.000. Liquidität?', solution: '(50.000 × 100) / 40.000 = 125%', formula: 'Liquidität = (UV × 100) / Kurzfristiges FK', steps: '50.000 ÷ 40.000 = 1,25 | × 100 = 125% (gut > 100%)'},
-            {id: 'k2ex6', level: 'Mittel', title: 'GuV-Rechnung berechnen', description: 'Erlöse: €200.000 | Aufwand: €150.000. Gewinn?', solution: 'Gewinn = 200.000 - 150.000 = <strong>€50.000</strong>', formula: 'Gewinn = Erlöse - Aufwand', steps: '€200.000 Erlöse | - €150.000 Aufwand | = €50.000 Gewinn'},
-            {id: 'k2ex7', level: 'Schwer', title: 'Komplette Bilanzanalyse', description: 'AV €400K | UV €200K | EK €300K | LFK €150K | KFK €150K. Analysiere alle Kennzahlen.', solution: 'Aktiva €600K = Passiva €600K ✓ | VG: 50% | Liquidität: 133%', formula: 'VG = (300×100)/600 = 50% | Liquidität = (200×100)/150 = 133%', steps: '1) Bilanzprüfung: AV+UV=Aktiva, EK+FK=Passiva | 2) VG berechnen | 3) Liquidität prüfen'},
-            {id: 'k2ex8', level: 'Schwer', title: 'Bilanz mit Privatentnahme', description: 'Bilanz: AV €80K | UV €70K | EK €100K | FK €50K. Privatentnahme €15K. Neue Bilanz?', solution: 'Neue Bilanz: Aktiva €135K (UV reduziert) | Passiva: EK €85K (reduziert) + FK €50K = €135K', formula: 'Privatentnahme reduziert UV und EK gleich', steps: 'UV: €70K - €15K = €55K | EK: €100K - €15K = €85K | Neue Aktiva: €135K | Neue Passiva: €135K'},
-            {id: 'k2ex9', level: 'Schwer', title: 'Abschreibung richtig zuordnen', description: 'Taxi kostet €60.000, AfA pro Jahr €12.000. Nach 2 Jahren: Buchwert?', solution: 'Buchwert = 60.000 - (12.000 × 2) = €36.000', formula: 'Restbuchwert = Anschaffungspreis - (AfA × Jahre)', steps: '€60.000 Anschaffungspreis | - €24.000 Abschreibung (2 Jahre) | = €36.000 Buchwert'},
-            {id: 'k2ex10', level: 'Schwer', title: 'Bilanz nach Kreditaufnahme', description: 'Bilanz: AV €100K | UV €50K | EK €120K | FK €30K. Kredit €20K aufgenommen. Neue Bilanz?', solution: 'Neue Bilanz: Aktiva €170K (UV erhöht) | Passiva: EK €120K + FK €50K = €170K', formula: 'Kreditaufnahme erhöht UV und FK', steps: 'UV: €50K + €20K = €70K | FK: €30K + €20K = €50K | Neue Aktiva: €170K | Neue Passiva: €170K'},
-            {id: 'k2ex11', level: 'Schwer', title: 'Bilanz mit Gewinn und Verlust', description: 'Bilanz Start: AV €300K | UV €100K | EK €250K | FK €150K. Gewinn €40K. Neue Bilanz?', solution: 'Neue Bilanz: Aktiva €440K | Passiva: EK €290K + FK €150K = €440K', formula: 'Gewinn erhöht EK und damit die Gesamtaktiva', steps: 'EK_neu: €250K + €40K = €290K | Aktiva erhöht sich auf €440K | Passiva: €290K + €150K'},
-            {id: 'k2ex12', level: 'Schwer', title: 'Analyse: Gutes vs. schlechtes Unternehmen', description: 'A: VG 80%, Liquidität 90% | B: VG 25%, Liquidität 150%. Welches Unternehmen ist besser finanziert?', solution: 'Unternehmen B: niedrigere VG (25% < 80%) = weniger Schulden, höhere Liquidität (150% > 90%) = besser zahlungsfähig', formula: 'Niedrig VG + Hoch Liquidität = bessere Finanzierung', steps: 'VG vergleichen: B besser | Liquidität vergleichen: B besser | Fazit: B ist finanziell stabiler'},
-            {id: 'k2ex13', level: 'Mittel', title: 'Saldenliste zur Bilanz', description: 'Saldenliste zeigt: Taxi €40K | Kassa €5K | Bank €25K | EK €50K | Kredit €20K. Bilanz?', solution: 'Aktiva: €70K (40+5+25) | Passiva: €70K (50+20) ✓', formula: 'Saldenliste → Bilanz (Aktiva = Passiva)', steps: 'Summiere Aktiva-Konten | Summiere Passiva-Konten | Vergleiche Summen'},
-            {id: 'k2ex14', level: 'Mittel', title: 'Aufwand und Erlöse trennen', description: 'Transaktionen: Fahrteinnahmen €5K | Benzin €1K | Versicherung €0,5K | Zinsen €0,2K. GuV?', solution: 'Erlöse €5K | Aufwand €1,7K (1+0,5+0,2) | Gewinn €3,3K', formula: 'GuV = Erlöse - Aufwand', steps: 'Addiere Erlöse | Addiere Aufwände | Berechne Differenz'},
-            {id: 'k2ex15', level: 'Schwer', title: 'Bilanzveränderungen hintereinander', description: 'Start: AV €100K | UV €50K | EK €100K | FK €50K. Dann: +€10K Gewinn, -€5K Privatentnahme. Finale Bilanz?', solution: 'Nach Gewinn: EK €110K | Nach Privatentnahme: EK €105K, UV €45K | Finale Aktiva: €145K | Finale Passiva: €150K', formula: 'Mehrere Transaktionen nacheinander', steps: 'Schritt 1: Gewinn buchen (+EK) | Schritt 2: Privatentnahme buchen (-UV, -EK) | Finale Bilanz prüfen'},
-            {id: 'k2ex16', level: 'Mittel', title: 'Unterschied Hypothek und Lieferantenschuld', description: 'Hypothek für Gebäude: €150K | Lieferantenverbindlichkeit: €5K | Beide zurückzahlen? Bilanzseite?', solution: 'Hypothek = Langfristiges FK (Passiva, über Jahre) | Lieferantenverbindlichkeit = Kurzfristiges FK (Passiva, < 1 Jahr)', formula: 'Langfristig > 1 Jahr, Kurzfristig < 1 Jahr', steps: 'Beide sind FK auf der Passiva-Seite | Hypothek = LFK | Lieferantenschuld = KFK'},
-            {id: 'k2ex17', level: 'Schwer', title: 'Eigenkapitalberechnung', description: 'Aktiva: €500K | Fremdkapital: €200K. Eigenkapital?', solution: 'EK = Aktiva - FK = 500K - 200K = €300K', formula: 'Eigenkapital = Vermögen - Fremdkapital', steps: '€500K Aktiva | - €200K Fremdkapital | = €300K Eigenkapital'},
-            {id: 'k2ex18', level: 'Schwer', title: 'Rentabilität mit verschiedenen Gewinn-Szenarien', description: 'EK: €100K. Gewinn A: €10K (10% Rentabilität). Gewinn B: €25K. Rentabilität B?', solution: 'Rentabilität B = (25K × 100) / 100K = 25%', formula: 'ROE = (Gewinn × 100) / EK', steps: '€25K ÷ €100K = 0,25 | × 100 = 25%'},
-            {id: 'k2ex19', level: 'Mittel', title: 'Saldenliste prüfen', description: 'Soll-Summe: €250K | Haben-Summe: €248K. Ausgeglichen?', solution: 'NEIN - Differenz €2K. Fehler in der Buchführung muss gefunden werden.', formula: 'Saldenliste: Soll-Summe MUSS = Haben-Summe', steps: '€250K vs €248K | Differenz €2K | Fehler suchen'},
-            {id: 'k2ex20', level: 'Schwer', title: 'Komplexe Bilanzverschiebung', description: 'Bilanz: AV €200K | UV €150K | EK €200K | LFK €100K | KFK €50K. Kaufe Taxi €30K mit Kredit. Neue Bilanz?', solution: 'AV €230K (200+30) | UV €150K | Aktiva €380K | EK €200K | LFK €130K (100+30) | KFK €50K | Passiva €380K', formula: 'Aktivkauf mit Kredit: AV ↑, LFK ↑', steps: '1) AV erhöhen | 2) LFK erhöhen | 3) Bilanzgleichung prüfen'}
-        ];
+        // ==================== THEORIE ====================
+        const theory = {
+            1: `
+                <div class="section">
+                    <h2>📖 Kapitel 1: Rechnungswesen</h2>
+                    <h3>Grundlagen Buchführung</h3>
+                    <ul>
+                        <li><strong>Rechnungswesen:</strong> Buchführung + Kostenrechnung + Statistik + Finanzierung</li>
+                        <li><strong>Aufbewahrung:</strong> 7 Jahre</li>
+                        <li><strong>Grundregel:</strong> Keine Buchung ohne Beleg</li>
+                        <li><strong>Belege:</strong> ER (Eingangsrechnung), K (Kassabeleg), AR (Ausgangsrechnung)</li>
+                    </ul>
+                    <h3>Tageslosung (Direkt & Indirekt)</h3>
+                    <p>Direkt: Kassenende − Kassenstart = Tageslosung</p>
+                    <p>Indirekt: Mit Ausgänge + Eingänge rechnen</p>
+                    <h3>Abschreibung (AfA)</h3>
+                    <ul>
+                        <li><strong>Linear:</strong> Preis ÷ Jahre</li>
+                        <li><strong>Degressive:</strong> Restbuchwert × %</li>
+                        <li><strong>Taxi-Standard:</strong> 5 Jahre</li>
+                        <li><strong>GWG:</strong> Unter €1.000 sofort</li>
+                    </ul>
+                    <h3>Gewinnberechnung (EAR)</h3>
+                    <p>Gewinn = Einnahmen − Ausgaben − AfA</p>
+                    <p><strong>Wichtig:</strong> Private Entnahmen NICHT abgezogen!</p>
+                    <h3>Pauschalierung & USt</h3>
+                    <ul>
+                        <li><strong>Pauschalierung:</strong> Bis €420K Umsatz</li>
+                        <li><strong>Taxi-Pauschale:</strong> 20% der Umsatzerlöse</li>
+                        <li><strong>USt 20%:</strong> Brutto ÷ 1,2 = Netto</li>
+                    </ul>
+                </div>
+            `,
+            2: `
+                <div class="section">
+                    <h2>📊 Kapitel 2: Doppelte Buchführung & Bilanzierung</h2>
+                    <h3>Bilanzgleichung</h3>
+                    <p><strong>Aktiva = Passiva</strong> (Vermögen = Schulden + EK)</p>
+                    <h3>Aktiva & Passiva</h3>
+                    <ul>
+                        <li><strong>Aktiva (linke Seite):</strong> Anlagevermögen (Taxi, Gebäude) + Umlaufvermögen (Kassa, Bank)</li>
+                        <li><strong>Passiva (rechte Seite):</strong> Eigenkapital (EK) + Fremdkapital (FK: Langfristig + Kurzfristig)</li>
+                    </ul>
+                    <h3>Wichtige Kennzahlen</h3>
+                    <ul>
+                        <li><strong>Verschuldungsgrad:</strong> (FK × 100) / GK | Ideal: 30−40%</li>
+                        <li><strong>Liquidität:</strong> (UV × 100) / KFK | Ideal: > 100%</li>
+                        <li><strong>EK-Rentabilität:</strong> (Gewinn × 100) / EK</li>
+                        <li><strong>Anlagendeckung:</strong> (EK + LFK) × 100 / AV | Ideal: > 150%</li>
+                        <li><strong>Cash-Flow:</strong> Gewinn + AfA (AfA ist keine Zahlung!)</li>
+                    </ul>
+                    <h3>GuV-Rechnung</h3>
+                    <p>Erlöse − Aufwendungen (inkl. AfA) = Gewinn</p>
+                </div>
+            `,
+            3: `
+                <div class="section">
+                    <h2>💰 Kapitel 3: Lohnverrechnung (Nach Personalrechnung.png)</h2>
+                    <h3>Grundformeln</h3>
+                    <p><strong>Brutto = Laufender + ÜST + Sonderzahlung</strong></p>
+                    <p><strong>Netto = Brutto − SV − Lohnsteuer</strong></p>
+                    <h3>Lohnsteuerfrei Bezüge</h3>
+                    <ul>
+                        <li>Sonderzahlung: bis €620</li>
+                        <li>Erste 15 ÜST (50%): bis €170</li>
+                        <li>Weitere ÜST (100%): bis €400</li>
+                        <li>Kilometergeld</li>
+                    </ul>
+                    <h3>Überstunden (ÜST-Teiler)</h3>
+                    <ul>
+                        <li><strong>Taxi (mit Taxischein):</strong> 55 h × 4,33 = 238 Stunden</li>
+                        <li><strong>Angestellte:</strong> 38 h × 4,33 = 165 Stunden</li>
+                        <li><strong>Arbeiter:</strong> 40 h × 4,33 = 173 Stunden</li>
+                        <li><strong>Erste 15:</strong> 50% Zuschlag</li>
+                        <li><strong>Ab 15:</strong> 100% Zuschlag</li>
+                        <li><strong>Sonntag/Feiertag:</strong> 100% Zuschlag</li>
+                    </ul>
+                    <h3>Abgaben & Steuern</h3>
+                    <ul>
+                        <li><strong>Finanzamt:</strong> DB (3,70%), DZ (0,36%), Lohnsteuer</li>
+                        <li><strong>SV (Gesundheitskassa):</strong> DN ~13,8%, AG 21,23%</li>
+                        <li><strong>Gemeinde/Stadtkasse:</strong> Kommunalsteuer (3%), U-Bahn (€2/Woche)</li>
+                        <li><strong>Abgabenfrist:</strong> 15. des Folge-Monats</li>
+                    </ul>
+                    <h3>Freibetrag vs Freigrenze</h3>
+                    <ul>
+                        <li><strong>Freibetrag (€1.095):</strong> KEINE Abgaben</li>
+                        <li><strong>Freigrenze (€1.095−€1.460):</strong> NUR auf Differenz berechnen</li>
+                    </ul>
+                    <h3>Höchstbeitragsgrunlage</h3>
+                    <p><strong>€6.930 pro Monat:</strong> SV-Beiträge nur bis diese Grenze!</p>
+                    <h3>Pendelerpauschale</h3>
+                    <p>Mindert <strong>NUR Lohnsteuer</strong>, nicht Auszahlung!</p>
+                    <ul>
+                        <li><strong>Klein-PP:</strong> 2−20km €0 | 20−40km €58 | 40−60km €113 | >60km €168</li>
+                    </ul>
+                </div>
+            `,
+        };
 
         let currentChapter = 1;
-        let progress = loadProgress();
-
-        function loadProgress() {
-            const saved = localStorage.getItem('konzessionComplete');
-            return saved ? JSON.parse(saved) : {k1: {questionsAnswered: 0, correctAnswers: 0, exercisesSolved: 0}, k2: {questionsAnswered: 0, correctAnswers: 0, exercisesSolved: 0}, timestamp: new Date().toISOString()};
-        }
-
-        function saveProgress() {
-            progress.timestamp = new Date().toISOString();
-            localStorage.setItem('konzessionComplete', JSON.stringify(progress));
-            updateStats();
-        }
+        let progress = JSON.parse(localStorage.getItem('konzeptionMaster') || '{"k1":{"q":0,"e":0},"k2":{"q":0,"e":0},"k3":{"q":0,"e":0}}');
 
         function switchChapter(ch) {
             currentChapter = ch;
-            document.querySelectorAll('.chapter-btn').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.chapter-btn').forEach(e => e.classList.remove('active'));
             event.target.classList.add('active');
-            document.getElementById('chapterStat').textContent = `${ch}/2`;
+            document.getElementById('chapterStat').textContent = `${ch}/3`;
+            renderTheory();
             renderQuestions();
             renderExercises();
+            renderCalculator();
             updateStats();
         }
 
         function switchTab(tabName) {
-            document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.content').forEach(e => e.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(e => e.classList.remove('active'));
             document.getElementById(tabName).classList.add('active');
             event.target.classList.add('active');
+        }
 
-            if (tabName === 'questions') renderQuestions();
-            if (tabName === 'exercises') renderExercises();
-            if (tabName === 'calculator') renderCalculator();
-            if (tabName === 'progress') renderProgress();
+        function renderTheory() {
+            document.getElementById('theoryContent').innerHTML = theory[currentChapter];
         }
 
         function renderQuestions() {
-            const questions = currentChapter === 1 ? chapter1Questions : chapter2Questions;
-            const prefix = currentChapter === 1 ? 'k1' : 'k2';
+            const q = allQuestions[currentChapter];
             let html = '';
-            questions.forEach((q, idx) => {
-                html += `<div class="question-card"><h3>Frage ${idx + 1}/${questions.length}: ${q.q}</h3><div class="options">${q.options.map((opt, i) => `<label class="option"><input type="radio" name="q${q.id}" value="${i}" onchange="checkAnswer('${q.id}', ${i}, '${q.explanation.replace(/'/g, "\\'")}')"> ${opt.text}</label>`).join('')}</div><div id="result-${q.id}"></div></div>`;
+            q.forEach((qitem, i) => {
+                html += `<div class="question-card">
+                    <h3>F${i+1}/${q.length}: ${qitem.q}</h3>
+                    <div class="options">
+                        ${qitem.options.map((opt, j) => `
+                            <label class="option">
+                                <input type="radio" name="${qitem.id}" value="${j}" onchange="checkAnswer('${qitem.id}', ${j}, '${qitem.explanation.replace(/'/g, "\\'")}', '${currentChapter}')">
+                                ${opt.text}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div id="result-${qitem.id}"></div>
+                </div>`;
             });
             document.getElementById('questionsContainer').innerHTML = html;
         }
 
-        function checkAnswer(qId, optIdx, explanation) {
-            const allQuestions = currentChapter === 1 ? chapter1Questions : chapter2Questions;
-            const q = allQuestions.find(x => x.id === qId);
+        function checkAnswer(qId, optIdx, explanation, ch) {
+            const q = allQuestions[ch].find(x => x.id === qId);
             const isCorrect = q.options[optIdx].correct;
-            const key = currentChapter === 1 ? 'k1' : 'k2';
-            if (isCorrect) progress[key].correctAnswers++;
-            progress[key].questionsAnswered++;
-            saveProgress();
-
+            const key = `k${ch}`;
+            progress[key].q++;
+            if (isCorrect) progress[key].q++;
+            localStorage.setItem('konzeptionMaster', JSON.stringify(progress));
+            
             const resultDiv = document.getElementById(`result-${qId}`);
-            resultDiv.innerHTML = `<div class="result ${isCorrect ? 'correct' : 'incorrect'}"><strong>${isCorrect ? '✓ Richtig!' : '✗ Falsch'}</strong><br/>${explanation}</div>`;
+            resultDiv.innerHTML = `<div class="result ${isCorrect ? 'correct' : 'incorrect'}">
+                <strong>${isCorrect ? '✓ RICHTIG!' : '✗ FALSCH'}</strong><br>${explanation}
+            </div>`;
+            updateStats();
         }
 
         function renderExercises() {
-            const exercises = currentChapter === 1 ? chapter1Exercises : chapter2Exercises;
+            const ex = exercises[currentChapter];
             let html = '';
-            exercises.forEach((ex, idx) => {
-                html += `<div class="exercise-card"><h3>${idx + 1}. ${ex.title} [${ex.level}]</h3><p><strong>Aufgabe:</strong> ${ex.description}</p><button class="btn btn-secondary" onclick="toggleSolution('${ex.id}')">Lösung anzeigen</button><div id="sol-${ex.id}" class="solution-box"><p><strong>Formel:</strong> ${ex.formula}</p><p><strong>Lösung:</strong> ${ex.solution}</p><p><strong>Schritte:</strong> ${ex.steps}</p></div></div>`;
+            ex.forEach(e => {
+                html += `<div class="exercise-card">
+                    <h3>${e.level} ${e.title}</h3>
+                    <p><strong>Aufgabe:</strong> ${e.q}</p>
+                    <button class="btn btn-primary" onclick="toggleSolution('${e.id}')">Lösung zeigen</button>
+                    <div id="sol-${e.id}" class="solution-box">
+                        <p><strong>Formel:</strong> ${e.f}</p>
+                        <p><strong>Lösung:</strong> ${e.sol}</p>
+                    </div>
+                </div>`;
             });
             document.getElementById('exercisesContainer').innerHTML = html;
         }
 
-        function toggleSolution(exId) {
-            document.getElementById(`sol-${exId}`).classList.toggle('show');
-            const key = currentChapter === 1 ? 'k1' : 'k2';
-            progress[key].exercisesSolved++;
-            saveProgress();
+        function toggleSolution(id) {
+            document.getElementById(`sol-${id}`).classList.toggle('show');
+            const key = `k${currentChapter}`;
+            progress[key].e++;
+            localStorage.setItem('konzeptionMaster', JSON.stringify(progress));
+            updateStats();
         }
 
         function renderCalculator() {
-            const html = currentChapter === 1 ? `
-                <div class="section">
-                    <h2>Abschreibungsrechner (Kapitel 1)</h2>
-                    <div class="calculator">
-                        <div class="calculator-group">
-                            <label>Anschaffungspreis (€):</label>
-                            <input type="number" id="price" placeholder="z.B. 60000" value="60000">
-                        </div>
-                        <div class="calculator-group">
-                            <label>Nutzungsdauer (Jahre):</label>
-                            <input type="number" id="years" placeholder="z.B. 5" value="5" min="1" max="20">
-                        </div>
-                        <div class="calculator-group">
-                            <label>Methode:</label>
-                            <select id="method">
-                                <option value="linear">Linear</option>
-                                <option value="degressive">Degressive (20%)</option>
-                            </select>
-                        </div>
-                        <button class="btn btn-primary" onclick="calculateDepreciation()" style="width: 100%;">Berechnen</button>
-                        <div id="calcResult" class="calculator-result" style="display:none;"></div>
+            if (currentChapter === 1) {
+                document.getElementById('calculatorContent').innerHTML = `
+                    <div class="calculator-box">
+                        <h3>Tageslosung Rechner</h3>
+                        <label>Kassenstart (€):</label>
+                        <input type="number" id="calc-start" placeholder="z.B. 200">
+                        <label>Kassenende (€):</label>
+                        <input type="number" id="calc-end" placeholder="z.B. 800">
+                        <button class="btn btn-primary" onclick="calcTageslosung()" style="width: 100%; margin-top: 1rem;">Berechnen</button>
+                        <div id="calc-result-tl"></div>
                     </div>
-                </div>
-                <div class="section">
-                    <h3>Tageslosung-Rechner</h3>
-                    <div class="calculator">
-                        <div class="calculator-group">
-                            <label>Kassenende (€):</label>
-                            <input type="number" id="endBalance" value="800">
-                        </div>
-                        <div class="calculator-group">
-                            <label>Barausgänge (€):</label>
-                            <input type="number" id="expenses" value="50">
-                        </div>
-                        <div class="calculator-group">
-                            <label>Bareingänge (€):</label>
-                            <input type="number" id="withdrawal" value="100">
-                        </div>
-                        <div class="calculator-group">
-                            <label>Kassenstart (€):</label>
-                            <input type="number" id="startBalance" value="200">
-                        </div>
-                        <button class="btn btn-primary" onclick="calculateTageslosung()" style="width: 100%;">Berechnen</button>
-                        <div id="tageResult" class="calculator-result" style="display:none;"></div>
+                    <div class="calculator-box">
+                        <h3>AfA Rechner</h3>
+                        <label>Anschaffungspreis (€):</label>
+                        <input type="number" id="calc-price" placeholder="z.B. 60000">
+                        <label>Nutzungsdauer (Jahre):</label>
+                        <input type="number" id="calc-years" placeholder="z.B. 5">
+                        <button class="btn btn-primary" onclick="calcAfA()" style="width: 100%; margin-top: 1rem;">Berechnen</button>
+                        <div id="calc-result-afa"></div>
                     </div>
-                </div>
-            ` : `
-                <div class="section">
-                    <h2>Bilanz-Rechner (Kapitel 2)</h2>
-                    <div class="calculator">
-                        <div class="calculator-group">
-                            <label>Anlagevermögen (€):</label>
-                            <input type="number" id="fixedAssets" value="40000">
-                        </div>
-                        <div class="calculator-group">
-                            <label>Umlaufvermögen (€):</label>
-                            <input type="number" id="currentAssets" value="30000">
-                        </div>
-                        <div class="calculator-group">
-                            <label>Eigenkapital (€):</label>
-                            <input type="number" id="equity" value="50000">
-                        </div>
-                        <div class="calculator-group">
-                            <label>Fremdkapital (€):</label>
-                            <input type="number" id="debt" value="20000">
-                        </div>
-                        <button class="btn btn-primary" onclick="calculateBalance()" style="width: 100%;">Bilanz prüfen</button>
-                        <div id="balanceResult" class="calculator-result" style="display:none;"></div>
+                `;
+            } else if (currentChapter === 2) {
+                document.getElementById('calculatorContent').innerHTML = `
+                    <div class="calculator-box">
+                        <h3>Kennzahlen Rechner</h3>
+                        <label>Fremdkapital (€):</label>
+                        <input type="number" id="calc-fk" placeholder="€">
+                        <label>Gesamtkapital (€):</label>
+                        <input type="number" id="calc-gk" placeholder="€">
+                        <button class="btn btn-primary" onclick="calcKennzahl()" style="width: 100%; margin-top: 1rem;">Verschuldungsgrad</button>
+                        <div id="calc-result-kz"></div>
                     </div>
-                </div>
-                <div class="section" style="margin-top: 2rem;">
-                    <h3>Kennzahlen-Rechner</h3>
-                    <div class="calculator">
-                        <div class="calculator-group">
-                            <label>Fremdkapital (€):</label>
-                            <input type="number" id="fk" value="30000">
-                        </div>
-                        <div class="calculator-group">
-                            <label>Gesamtkapital (€):</label>
-                            <input type="number" id="tk" value="100000">
-                        </div>
-                        <div class="calculator-group">
-                            <label>Gewinn (€):</label>
-                            <input type="number" id="profit" value="20000">
-                        </div>
-                        <div class="calculator-group">
-                            <label>Eigenkapital (€):</label>
-                            <input type="number" id="ek" value="70000">
-                        </div>
-                        <button class="btn btn-primary" onclick="calculateRatios()" style="width: 100%;">Kennzahlen berechnen</button>
-                        <div id="ratioResult" class="calculator-result" style="display:none;"></div>
-                    </div>
-                </div>
-            `;
-            document.getElementById('calculatorContent').innerHTML = html;
-        }
-
-        function calculateDepreciation() {
-            const price = parseFloat(document.getElementById('price').value);
-            const years = parseInt(document.getElementById('years').value);
-            const method = document.getElementById('method').value;
-            
-            if (!price || !years) {
-                alert('Bitte alle Felder ausfüllen');
-                return;
-            }
-
-            let result = '';
-            
-            if (method === 'linear') {
-                const annual = Math.round(price / years);
-                result = `<strong>Lineare Abschreibung:</strong><br/>Jahres-AfA: <strong>€ ${annual.toLocaleString('de')}</strong><br/><br/><strong>Tabelle:</strong><br/>`;
-                let remaining = price;
-                for (let i = 1; i <= years; i++) {
-                    remaining -= annual;
-                    result += `Jahr ${i}: € ${annual.toLocaleString('de')} | Restbuchwert: € ${Math.max(0, Math.round(remaining)).toLocaleString('de')}<br/>`;
-                }
+                `;
             } else {
-                const percent = 0.2;
-                result = `<strong>Degressive Abschreibung (20%):</strong><br/><br/><strong>Tabelle:</strong><br/>`;
-                let remaining = price;
-                for (let i = 1; i <= years; i++) {
-                    const depreciation = Math.round(remaining * percent);
-                    remaining -= depreciation;
-                    result += `Jahr ${i}: € ${depreciation.toLocaleString('de')} | Restbuchwert: € ${Math.round(remaining).toLocaleString('de')}<br/>`;
-                }
+                document.getElementById('calculatorContent').innerHTML = `
+                    <div class="calculator-box">
+                        <h3>Lohnabrechnung Schnellrechner</h3>
+                        <label>Brutto (€):</label>
+                        <input type="number" id="calc-brutto" placeholder="€">
+                        <label>SV Prozent (%):</label>
+                        <input type="number" id="calc-sv" placeholder="13.8" value="13.8">
+                        <label>LSt Prozent (%):</label>
+                        <input type="number" id="calc-lst" placeholder="8" value="8">
+                        <button class="btn btn-primary" onclick="calcLohn()" style="width: 100%; margin-top: 1rem;">Netto Berechnen</button>
+                        <div id="calc-result-lohn"></div>
+                    </div>
+                `;
             }
-
-            document.getElementById('calcResult').innerHTML = result;
-            document.getElementById('calcResult').style.display = 'block';
         }
 
-        function calculateTageslosung() {
-            const end = parseFloat(document.getElementById('endBalance').value);
-            const expenses = parseFloat(document.getElementById('expenses').value);
-            const withdrawal = parseFloat(document.getElementById('withdrawal').value);
-            const start = parseFloat(document.getElementById('startBalance').value);
-            
-            if (!end || !start) {
-                alert('Bitte Kassenstart und Kassenende ausfüllen');
-                return;
-            }
-
-            const tageslosung = end + expenses - withdrawal - start;
-            
-            const result = `<strong>Tageslosung (Indirekte Methode):</strong><br/><br/>
-                € ${end.toLocaleString('de')} (Kassenende)<br/>
-                + € ${expenses.toLocaleString('de')} (Barausgänge)<br/>
-                − € ${withdrawal.toLocaleString('de')} (Bareingänge)<br/>
-                − € ${start.toLocaleString('de')} (Kassenstart)<br/><br/>
-                <strong>= € ${Math.round(tageslosung).toLocaleString('de')} (Tageslosung)</strong>`;
-
-            document.getElementById('tageResult').innerHTML = result;
-            document.getElementById('tageResult').style.display = 'block';
+        function calcTageslosung() {
+            const start = parseFloat(document.getElementById('calc-start').value) || 0;
+            const end = parseFloat(document.getElementById('calc-end').value) || 0;
+            const result = end - start;
+            document.getElementById('calc-result-tl').innerHTML = `<div class="calc-result">Tageslosung: €${result.toFixed(2)}</div>`;
         }
 
-        function calculateBalance() {
-            const fixedAssets = parseFloat(document.getElementById('fixedAssets').value);
-            const currentAssets = parseFloat(document.getElementById('currentAssets').value);
-            const equity = parseFloat(document.getElementById('equity').value);
-            const debt = parseFloat(document.getElementById('debt').value);
-            
-            const totalAssets = fixedAssets + currentAssets;
-            const totalPassive = equity + debt;
-            
-            const result = `Aktiva: €${totalAssets.toLocaleString('de')} | Passiva: €${totalPassive.toLocaleString('de')} | ${totalAssets === totalPassive ? '✓ AUSGEGLICHEN!' : '✗ NICHT ausgeglichen (Differenz: €' + Math.abs(totalAssets - totalPassive).toLocaleString('de') + ')'}`;
-            
-            document.getElementById('balanceResult').innerHTML = result;
-            document.getElementById('balanceResult').style.display = 'block';
+        function calcAfA() {
+            const price = parseFloat(document.getElementById('calc-price').value) || 0;
+            const years = parseFloat(document.getElementById('calc-years').value) || 1;
+            const afa = price / years;
+            document.getElementById('calc-result-afa').innerHTML = `<div class="calc-result">Jahres-AfA: €${afa.toFixed(2)}</div>`;
         }
 
-        function calculateRatios() {
-            const fk = parseFloat(document.getElementById('fk').value);
-            const tk = parseFloat(document.getElementById('tk').value);
-            const profit = parseFloat(document.getElementById('profit').value);
-            const ek = parseFloat(document.getElementById('ek').value);
-            
-            const verschuldung = (fk / tk * 100).toFixed(2);
-            const rentabilität = (profit / ek * 100).toFixed(2);
-            
-            const result = `Verschuldungsgrad: ${verschuldung}% | Eigenkapitalrentabilität: ${rentabilität}%`;
-            
-            document.getElementById('ratioResult').innerHTML = result;
-            document.getElementById('ratioResult').style.display = 'block';
+        function calcKennzahl() {
+            const fk = parseFloat(document.getElementById('calc-fk').value) || 0;
+            const gk = parseFloat(document.getElementById('calc-gk').value) || 1;
+            const vg = (fk / gk * 100).toFixed(1);
+            document.getElementById('calc-result-kz').innerHTML = `<div class="calc-result">Verschuldungsgrad: ${vg}%</div>`;
+        }
+
+        function calcLohn() {
+            const brutto = parseFloat(document.getElementById('calc-brutto').value) || 0;
+            const sv = parseFloat(document.getElementById('calc-sv').value) || 0;
+            const lst = parseFloat(document.getElementById('calc-lst').value) || 0;
+            const netto = brutto - (brutto * sv / 100) - (brutto * lst / 100);
+            document.getElementById('calc-result-lohn').innerHTML = `<div class="calc-result">Netto: €${netto.toFixed(2)}</div>`;
         }
 
         function updateStats() {
-            const k1questions = chapter1Questions.length;
-            const k2questions = chapter2Questions.length;
-            const k1exercises = chapter1Exercises.length;
-            const k2exercises = chapter2Exercises.length;
-
-            const totalQuestions = k1questions + k2questions;
-            const totalExercises = k1exercises + k2exercises;
-            const totalAnswered = progress.k1.questionsAnswered + progress.k2.questionsAnswered;
-            const totalCorrect = progress.k1.correctAnswers + progress.k2.correctAnswers;
-            const totalSolved = progress.k1.exercisesSolved + progress.k2.exercisesSolved;
-
-            const correctRate = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
-            const totalProgress = Math.round(((totalAnswered + totalSolved) / (totalQuestions + totalExercises)) * 100);
-
-            document.getElementById('questionsStat').textContent = `${totalAnswered}/${totalQuestions}`;
-            document.getElementById('exercisesStat').textContent = `${totalSolved}/${totalExercises}`;
-            document.getElementById('successStat').textContent = `${correctRate}%`;
-            document.getElementById('progressFill').style.width = totalProgress + '%';
+            const total_q = 40 + 45 + 25;
+            const total_e = 10 + 10 + 10;
+            const answered_q = progress.k1.q + progress.k2.q + progress.k3.q;
+            const solved_e = progress.k1.e + progress.k2.e + progress.k3.e;
+            const percent = total_q > 0 ? Math.round((answered_q / total_q) * 100) : 0;
+            
+            document.getElementById('qStat').textContent = `${answered_q}/${total_q}`;
+            document.getElementById('exStat').textContent = `${solved_e}/${total_e}`;
+            document.getElementById('okStat').textContent = `${percent}%`;
+            document.getElementById('progressFill').style.width = Math.round(((answered_q + solved_e) / (total_q + total_e)) * 100) + '%';
         }
 
         function renderProgress() {
-            const k1questions = chapter1Questions.length;
-            const k2questions = chapter2Questions.length;
-            const k1exercises = chapter1Exercises.length;
-            const k2exercises = chapter2Exercises.length;
-
-            const totalQuestions = k1questions + k2questions;
-            const totalExercises = k1exercises + k2exercises;
-            const totalAnswered = progress.k1.questionsAnswered + progress.k2.questionsAnswered;
-            const totalCorrect = progress.k1.correctAnswers + progress.k2.correctAnswers;
-            const totalSolved = progress.k1.exercisesSolved + progress.k2.exercisesSolved;
-
-            const correctRate = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
-            const totalProgress = Math.round(((totalAnswered + totalSolved) / (totalQuestions + totalExercises)) * 100);
-
-            let html = `
-                <div class="metric-item"><div class="label">📖 Kapitel 1 Fragen</div><div class="value">${progress.k1.questionsAnswered}/${k1questions}</div></div>
-                <div class="metric-item"><div class="label">📖 Kapitel 1 Aufgaben</div><div class="value">${progress.k1.exercisesSolved}/${k1exercises}</div></div>
-                <div class="metric-item"><div class="label">📊 Kapitel 2 Fragen</div><div class="value">${progress.k2.questionsAnswered}/${k2questions}</div></div>
-                <div class="metric-item"><div class="label">📊 Kapitel 2 Aufgaben</div><div class="value">${progress.k2.exercisesSolved}/${k2exercises}</div></div>
-                <div class="metric-item"><div class="label">✓ Gesamt Richtig</div><div class="value">${totalCorrect}/${totalAnswered || '-'}</div></div>
-                <div class="metric-item"><div class="label">📈 Erfolgsquote</div><div class="value">${correctRate}%</div></div>
-                <div class="metric-item"><div class="label">⭐ Gesamt Progress</div><div class="value">${totalProgress}%</div></div>
+            const k1_q = 40, k2_q = 45, k3_q = 25;
+            const k1_e = 10, k2_e = 10, k3_e = 10;
+            document.getElementById('progressMetrics').innerHTML = `
+                <div class="metric-grid">
+                    <div class="metric-item"><div class="label">K1 Fragen</div><div class="value">${progress.k1.q}/${k1_q}</div></div>
+                    <div class="metric-item"><div class="label">K1 Aufgaben</div><div class="value">${progress.k1.e}/${k1_e}</div></div>
+                    <div class="metric-item"><div class="label">K2 Fragen</div><div class="value">${progress.k2.q}/${k2_q}</div></div>
+                    <div class="metric-item"><div class="label">K2 Aufgaben</div><div class="value">${progress.k2.e}/${k2_e}</div></div>
+                    <div class="metric-item"><div class="label">K3 Fragen</div><div class="value">${progress.k3.q}/${k3_q}</div></div>
+                    <div class="metric-item"><div class="label">K3 Aufgaben</div><div class="value">${progress.k3.e}/${k3_e}</div></div>
+                </div>
             `;
-            document.getElementById('progressMetrics').innerHTML = html;
         }
 
-        function resetAllProgress() {
+        function resetProgress() {
             if (confirm('Fortschritt wirklich löschen?')) {
-                localStorage.removeItem('konzessionComplete');
-                progress = loadProgress();
-                updateStats();
-                alert('Zurückgesetzt!');
+                localStorage.removeItem('konzeptionMaster');
+                location.reload();
             }
         }
 
-        function exportProgress() {
-            const data = {...progress, date: new Date().toLocaleString('de-AT')};
-            const json = JSON.stringify(data, null, 2);
-            const blob = new Blob([json], {type: 'application/json'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `konzession-k1-k2-${new Date().toISOString().split('T')[0]}.json`;
-            a.click();
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
+            renderTheory();
+            renderQuestions();
+            renderExercises();
             renderCalculator();
             updateStats();
         });
